@@ -1,32 +1,16 @@
-import { useState } from 'react'
-import hosenLogo from './assets/LOGO.svg'
-import './App.css'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './pages/home.jsx'; // Assuming you have a Home component
+import Quizz from './pages/quizz.jsx'; // Assuming you have an About component
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div className="logos">
-        <img src={hosenLogo} className="logo" alt="Hosen irguni logo" />
-      </div>
-      <div className="headline-container">
-        <h1 className="heading-h1">המבחן האולטימטיבי לחוסן ארגוני</h1>
-        <p className="subheading-p">
-          גלו האם אתם מיישמים את
-          עקרונות החוסן הארגוני
-          ביחידה שלכם
-        </p>
-      </div>
-      <div className="card">
-        <button className="button-hosen" onClick={() => setCount((count) => count + 1)}>
-          להתחלת המבחן
-        </button>
-      </div>
-      <span class="white-circle"></span>
-      <span class="deep-green-circle"></span>
-    </>
-  )
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/quizz" element={<Quizz />} />
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;

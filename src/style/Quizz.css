@@ -1,0 +1,40 @@
+.quizz-page {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+}
+
+.quizz-page::before {
+    content: "";
+    position: fixed;
+    width: 110vmax;
+    height: 104vmax;
+    background: #384D22;
+    border-radius: 50%;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -80%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+.quizz-container {
+    justify-content: center;
+    align-items: center;
+    margin-right: clamp(21.875rem, 12vw + 1rem, 4.5rem);
+}
+
+.actions-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+
+@media (min-width: 40em) {
+    .quizz-page::before {
+        width: 130vmax;
+    }
+}
