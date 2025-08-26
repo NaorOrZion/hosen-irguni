@@ -1,0 +1,143 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 3rem;
+  text-align: center;
+  direction: rtl;
+}
+
+.logo {
+  height: 151px;
+  padding: 0;
+  will-change: filter;
+  transition: filter 300ms;
+}
+
+.logo:hover {
+  filter: drop-shadow(0 0 2em #506B33);
+}
+
+.headline-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 17px;
+  gap: 33px;
+}
+
+.heading-h1 {
+  color: #384D22;
+  font-size: 48px;
+  margin: 0px;
+}
+
+.subheading-p {
+  color: #506B33;
+  font-size: 24px;
+  margin: 0px;
+}
+
+.card {
+  margin-top: 148px;
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 13%;
+  /* Change 10% to your desired X% */
+  z-index: 1;
+}
+
+.button-hosen {
+  font-size: 20px;
+  background-color: #F7941D;
+  color: #FFFFFF;
+  width: 210px;
+  height: 60px;
+  border: none;
+  box-shadow: 0px 5px 0px #506B33;
+  padding: 12px 24px;
+  border-radius: 100px;
+  cursor: pointer;
+}
+
+@media (min-width: 600px) {
+  .heading-h1 {
+    font-size: 60px;
+  }
+
+  .button-hosen {
+    font-size: 22px;
+    width: 250px;
+    height: 71px;
+    padding: 16px 32px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .logo {
+    height: 151px;
+    margin-top: 10%;
+  }
+  .heading-h1 {
+    font-size: 72px;
+    line-height: 85px;
+
+  }
+
+  .subheading-p {
+    font-size: 36px;
+    line-height: 43px;
+  }
+
+  .headline-container {
+    max-width: 710px;
+    margin-top: 40px;
+    gap: 33px;
+  }
+
+  .button-hosen {
+    font-size: 24px;
+    width: 320px;
+    height: 91px;
+    padding: 20px 40px;
+  }
+
+  .deep-green-circle {
+
+  }
+}
+
+.white-circle {
+  width: 110vmax;
+  /* Makes it cover width/height proportionally */
+  height: 104vmax;
+  background: white;
+  /* Circle color */
+  border-radius: 50%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -80%);
+  z-index: -1;
+  /* Places it behind other content */
+  overflow: hidden;
+  /* Ensures no scrollbars appear */
+  pointer-events: none;
+}
+
+.deep-green-circle {
+  width: 55vmax;
+  /* Makes it cover width/height proportionally */
+  height: 40vmax;
+  background: #506B33;
+  /* Circle color */
+  border-radius: 50%;
+  position: fixed;
+  top: 50%;
+  left: 95%;
+  transform: translate(-50%, -40%);
+  z-index: -2;
+  /* Places it behind other content */
+  overflow: hidden;
+  /* Ensures no scrollbars appear */
+  pointer-events: none;
+}
