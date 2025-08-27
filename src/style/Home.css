@@ -58,6 +58,13 @@
   padding: 12px 24px;
   border-radius: 100px;
   cursor: pointer;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.button-hosen:active {
+  border: none;
+  box-shadow: none;
+  transform: translateY(5px);
 }
 
 @media (min-width: 600px) {

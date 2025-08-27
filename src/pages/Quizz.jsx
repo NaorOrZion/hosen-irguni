@@ -26,7 +26,7 @@ function Quizz() {
             </div>
           </div>
           <div className="illustration-car">
-            <img src={Car} alt="Car Illustration" style={{width: "50vw"}} />
+            <img src={Car} alt="Car Illustration" />
           </div>
           <div className="card">
             <button className="button-hosen" onClick={() => navigate("/quizz")}>
