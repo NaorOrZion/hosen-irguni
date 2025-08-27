@@ -1,6 +1,7 @@
 import { useState } from "react";
 import arrowBack from "../assets/arrow-back.svg";
 import ProgressBar from "../components/ProgressBar";
+import Car from "../assets/car.svg";
 import "../style/Quizz.css";
 
 function Quizz() {
@@ -9,16 +10,28 @@ function Quizz() {
       <div className="quizz-page">
         <div className="quizz-container">
           <div className="upper-bar">
-            <div className="actions-bar">
-              <p className="question-number">1/5</p>
-              <img src={arrowBack} alt="arrow-back" />
-            </div>
-            <div className="progress-bar-mobile">
-              <ProgressBar />
+            <div className="progress-and-action-bar">
+              <div className="actions-bar">
+                <p className="question-number">1/5</p>
+                <img src={arrowBack} alt="arrow-back" />
+              </div>
+              <div className="progress-bar-mobile">
+                <ProgressBar />
+              </div>
             </div>
             <div className="question-box">
-                <p className="question-text">מה עם ערכי החסון ארגוני בעיניך?</p>
+              <p className="question-text">
+                נניח שהמכונית היא הצוות שלכם ואתם האנשים מאחורי ההגה...
+              </p>
             </div>
+          </div>
+          <div className="illustration-car">
+            <img src={Car} alt="Car Illustration" style={{width: "50vw"}} />
+          </div>
+          <div className="card">
+            <button className="button-hosen" onClick={() => navigate("/quizz")}>
+              להתחלת המבחן
+            </button>
           </div>
         </div>
       </div>

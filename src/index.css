@@ -8,7 +8,7 @@
   background-color: #242424;
 
   --fs-heading: clamp(3rem, 12vw + 1rem, 4.5rem);
-  --fs-subheading: clamp(1.5rem, 12vw + 1rem, 1.5rem);
+  --fs-subheading: clamp(1.5rem, 6vw + 1rem, 1.5rem);
   --fs-button: clamp(1.25rem, 12vw + 1rem, 1.5rem);
 
   font-synthesis: none;

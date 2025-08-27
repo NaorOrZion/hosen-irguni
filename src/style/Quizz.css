@@ -23,14 +23,16 @@
   align-items: center;
   width: 80%;
   margin: auto;
-  display: block;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .upper-bar {
   margin-top: 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 1.188rem;
+  gap: clamp(2rem, 7vh + 1rem, 9rem);
 }
 
 .actions-bar {
@@ -45,11 +47,26 @@
   margin: 0;
 }
 
+.progress-and-action-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 1.188rem;
+}
+
 .question-text {
   font-size: var(--fs-subheading);
   margin: 0px;
   color: white;
   font-weight: bold;
+  line-height: 28px;
+}
+
+.illustration-car {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }
 
 @media (min-width: 40em) {
