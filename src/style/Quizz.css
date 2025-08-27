@@ -1,40 +1,59 @@
 .quizz-page {
-    position: fixed;
-    inset: 0;
-    overflow: hidden;
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
 }
 
 .quizz-page::before {
-    content: "";
-    position: fixed;
-    width: 110vmax;
-    height: 104vmax;
-    background: #384D22;
-    border-radius: 50%;
-    top: 10%;
-    left: 50%;
-    transform: translate(-50%, -80%);
-    z-index: -1;
-    pointer-events: none;
+  content: "";
+  position: fixed;
+  width: 110vmax;
+  height: 104vmax;
+  background: #384d22;
+  border-radius: 50%;
+  top: 18%;
+  left: 50%;
+  transform: translate(-50%, -80%);
+  z-index: -1;
+  pointer-events: none;
 }
 
 .quizz-container {
-    justify-content: center;
-    align-items: center;
-    margin-right: clamp(21.875rem, 12vw + 1rem, 4.5rem);
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  margin: auto;
+  display: block;
+}
+
+.upper-bar {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.188rem;
 }
 
 .actions-bar {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
 }
 
+.question-number {
+  margin: 0;
+}
 
+.question-text {
+  font-size: var(--fs-subheading);
+  margin: 0px;
+  color: white;
+  font-weight: bold;
+}
 
 @media (min-width: 40em) {
-    .quizz-page::before {
-        width: 130vmax;
-    }
+  .quizz-page::before {
+    width: 130vmax;
+  }
 }
