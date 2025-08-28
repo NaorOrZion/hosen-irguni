@@ -1,6 +1,7 @@
 import { useState } from "react";
 import arrowBack from "../assets/arrow-back.svg";
 import ProgressBar from "../components/ProgressBar";
+import AnswerButtons from "../components/AnswerButtons";
 import Car from "../assets/car.svg";
 import "../style/Quizz.css";
 
@@ -25,11 +26,14 @@ function Quizz() {
               </p>
             </div>
           </div>
-          <div className="illustration-car">
-            <img src={Car} alt="Car Illustration" />
+          <div className="answers">
+            <AnswerButtons />
           </div>
+          {/* <div className="illustration-car">
+            <img src={Car} alt="Car Illustration" />
+          </div> */}
           <div className="card">
-            <button className="button-hosen" onClick={() => navigate("/quizz")}>
+            <button className="button-hosen" style={{ marginBottom: "3rem" }} onClick={() => navigate("/quizz")}>
               להתחלת המבחן
             </button>
           </div>
