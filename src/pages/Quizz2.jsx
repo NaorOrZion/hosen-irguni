@@ -9,7 +9,8 @@ export const Quizz2 = () => {
     return (
         <div className="quizz-page">
             <div className="upper-section">
-                <img src={fullCircle} alt="" className="circle" />
+                {/* <img src={fullCircle} alt="" className="circle" /> */}
+                <div className="circle"></div>
                 <div className="content-container">
                     <div>
                         <div className="actions-bar">
@@ -22,7 +23,13 @@ export const Quizz2 = () => {
                 </div>
             </div>
             <div className="answers">
-                <AnswerButtons />
+                <div className="answers-fade" />
+                <div className="answers-scroll">
+                    <AnswerButtons />
+                    <button className="button-hosen" style={{ marginBottom: "3rem" }} onClick={() => navigate("/quizz")}>
+                        להתחלת המבחן
+                    </button>
+                </div>
             </div>
         </div>
     );
