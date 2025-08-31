@@ -4,6 +4,7 @@ import fullCircle from "../assets/full-circle.svg"
 import ProgressBar from "../components/ProgressBar";
 import arrowBack from "../assets/arrow-back.svg";
 import arrowDownGreen from "../assets/arrow-down-green.svg";
+import Carousel from "../components/Carousel";
 import Car from "../assets/car.svg";
 import AnswerButtons from "../components/AnswerButtons";
 import FinalBar from "../components/FinalBar";
@@ -21,6 +22,7 @@ export const Quizz2 = () => {
                     <p className="break-text">מה זה אומר עליי?</p>
                     <img src={arrowDownGreen} alt="arrow-down" className="arrow-down"/>
                 </div>
+                <Carousel />
             </div>
             {/* <div className="upper-section">
                 <div className="content-container">

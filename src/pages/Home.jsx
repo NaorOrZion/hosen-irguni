@@ -4,11 +4,10 @@ import hosenLogo from '../assets/LOGO.svg'
 import '../style/Home.css'
 
 function Home() {
-  const [count, setCount] = useState(0)
   const navigate = useNavigate()
 
   return (
-    <>
+    <div className="home-page">
       <div className="logos">
         <img src={hosenLogo} className="logo" alt="Hosen irguni logo" />
       </div>
@@ -20,14 +19,14 @@ function Home() {
           ביחידה שלכם
         </p>
       </div>
-      <div className="card">
+      <div className="button-placement">
         <button className="button-hosen" onClick={() => navigate('/quizz')}>
           להתחלת המבחן
         </button>
       </div>
       <span className="white-circle"></span>
       <span className="deep-green-circle"></span>
-    </>
+    </div>
   )
 }
 
