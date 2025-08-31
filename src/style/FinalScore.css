@@ -1,0 +1,44 @@
+.final-score {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    direction: rtl;
+    margin-top: 10%;
+    gap: 2.875rem;
+}
+
+.score-number {
+    font-size: 3rem;
+    font-weight: bold;
+    margin: auto;
+}
+
+.score-text {
+    text-align: center;
+    height: auto;
+    width: 80%;
+    margin: auto;
+}
+
+.text-box {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.125rem;
+}
+
+.score-light {
+    width: 12.875rem;
+}
+
+@media (max-width: 380px) {
+    .score-light {
+        width: 8rem;
+    }
+
+    .final-score {
+        gap: 1.5rem;
+    }
+}

@@ -7,11 +7,6 @@ function AnswerButtons() {
       <button className="answer-button">הצוות סיים תרגל לאחרונה, מכיר את הנהלים ויודע לאן נוסעים</button>
       <button className="answer-button">הצוות לא הוכשר למשימה הנוכחית</button>
       <button className="answer-button">פנס רוורס לא עובד – הצוות תרגל לאחרונה, רק</button>
-      <button className="answer-button">פנס רוורס לא עובד – הצוות תרגל לאחרונה, רק</button>
-      <button className="answer-button">פנס רוורס לא עובד – הצוות תרגל לאחרונה, רק</button>
-      <button className="answer-button">פנס רוורס לא עובד – הצוות תרגל לאחרונה, רק</button>
-      <button className="answer-button">פנס רוורס לא עובד – הצוות תרגל לאחרונה, רק</button>
-      <button className="answer-button">פנס רוורס לא עובד – הצוות תרגל לאחרונה, רק</button>
     </div>
   );
 }

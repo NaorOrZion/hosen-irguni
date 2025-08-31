@@ -1,0 +1,27 @@
+.backhome {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 1.125rem;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+    text-decoration: underline;
+}
+
+.home-icon {
+    width: 1.5rem;
+    height: auto;
+    margin-left: 0.5rem;
+}
+
+.final-bar {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 1.5rem;
+    box-sizing: border-box;
+    margin-top: 3%;
+}
