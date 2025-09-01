@@ -1,86 +1,175 @@
-.gallery-cell {
+.carousel-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+.card-container {
   width: 100%;
-  height: 200px;
-  margin-right: 10px;
-  background: #8C8;
-  counter-increment: gallery-cell;
+  max-width: 20rem;
+  margin: 0 auto;
+  min-height: 400px; /* Minimum height instead of fixed height */
 }
 
-/* cell number */
-.gallery-cell:before {
-  display: block;
+.card {
+  border: 1px solid white;
+  border-radius: 20px;
+  padding: 2rem;
   text-align: center;
-  content: counter(gallery-cell);
-  line-height: 200px;
-  font-size: 80px;
-  color: white;
+  position: relative;
+  color: #ffffff;
+  min-height: 400px; /* Minimum height for consistency */
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
 }
 
+.card-header {
+  margin-bottom: 1.5rem;
+  color: #ffffff;
+  flex-shrink: 0; /* Don't shrink the header */
+}
 
-/* big buttons, no circle */
-.flickity-prev-next-button {
-  width: 100px;
-  height: 100px;
-  background: transparent;
+.card-icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
 }
-/* arrow color */
-.flickity-prev-next-button .arrow {
-  fill: white;
+
+.card-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.4;
 }
-.flickity-prev-next-button.no-svg {
+
+.card-content {
+  margin-bottom: 2rem;
+  display: rtl;
+  flex: 1; /* Take remaining space */
+  min-height: 120px; /* Minimum height for content area */
+}
+
+.card-content p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0;
+  direction: rtl;
+  text-align: center;
+}
+
+.card-illustration {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+  flex-shrink: 0; /* Don't shrink the illustration */
+}
+
+.card-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  width: 100%;
+  flex-shrink: 0;
+  /* Debug: prevent any flexbox interference */
+  flex-direction: row;
+  flex-wrap: nowrap;
+  position: relative;
+}
+
+.nav-button {
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgb(173, 173, 173) !important;
+
   color: white;
+  font-size: 1.5rem;
+  width: 40px !important;
+  height: 40px !important;
+  min-width: 40px !important;
+  min-height: 40px !important;
+  max-width: 40px !important;
+  max-height: 40px !important;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  aspect-ratio: 1 / 1;
+  /* Nuclear option: force circular shape */
+  position: relative;
+  overflow: hidden;
+  /* Remove all flexbox properties */
+  flex: none !important;
+  flex-shrink: 0 !important;
+  flex-grow: 0 !important;
+  flex-basis: auto !important;
+  /* Ensure text doesn't stretch the button */
+  white-space: nowrap;
+  text-overflow: clip;
+  /* Force the button to be exactly circular */
+  padding: 0 !important;
+  margin: 0 !important;
 }
-.flickity-prev-next-button:hover {
-  background: transparent;
-}
-/* hide disabled button */
-.flickity-prev-next-button:disabled {
+
+/* Target the button content specifically */
+.nav-button::before {
   display: none;
 }
 
-/* position dots in gallery */
-.flickity-page-dots {
-  bottom: 0px;
-}
-/* white circles */
-.flickity-page-dots .dot {
-  width: 12px;
-  height: 12px;
-  opacity: 1;
-  background: transparent;
-  border: 2px solid white;
-}
-/* fill-in selected dot */
-.flickity-page-dots .dot.is-selected {
-  background: white;
+.nav-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
 }
 
-.carousel-wrapper {
-    margin-top: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.nav-button:focus {
+  outline: none;
 }
 
-.swiper {
-  width: 100%;
-  height: 100%;
-}
-
-.swiper-slide {
-  text-align: center;
-  font-size: 18px;
-  background: #444;
-
-  /* Center slide text vertically */
+.pagination-dots {
   display: flex;
+  gap: 0.5rem;
   justify-content: center;
   align-items: center;
+  position: relative;
+  /* Nuclear option: if grid fails, use absolute positioning */
+  min-height: 12px;
 }
 
-.swiper-slide img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.dot {
+  width: 12px !important;
+  height: 12px !important;
+  min-width: 12px !important;
+  min-height: 12px !important;
+  max-width: 12px !important;
+  max-height: 12px !important;
+  border: 2px solid #ccc;
+  background: transparent;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-block;
+  vertical-align: middle;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+  font-size: 0;
+  overflow: hidden;
+  /* Nuclear option: force circular shape */
+  aspect-ratio: 1 / 1;
+  flex: none;
+}
+
+.dot.active {
+  background: #ff8c00;
+  border-color: #ff8c00;
+}
+
+.dot:hover {
+  border-color: #ff8c00;
 }
