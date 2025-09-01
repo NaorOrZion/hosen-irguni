@@ -4,7 +4,9 @@
     color: white;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative; /* Add this to establish positioning context */
 }
 
 .upper-section {
@@ -20,7 +22,7 @@
 }
 
 .circle {
-    position: fixed;
+    position: absolute; /* Change from fixed to absolute */
     width: 110vmax;
     height: 105vmax;
     background: #384d22;
@@ -184,20 +186,51 @@
 
 .final-content {
     z-index: 3;
+    container-type: inline-size;
+
 }
 
 .break {
-    position: fixed;
-    top: 82%;
-    left: 50%;
-    transform: translateX(-50%);
-    /* margin-top: clamp(6vh, 12vh + 1rem, 8vh); */
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     color: #384D22;
     gap: 1rem;
+    margin-top: 2rem;
+}
+
+@media (max-height: 600px) {
+    .break {
+        margin-top: 4rem;
+    }
+}
+
+@media (min-height: 730px) {
+    .break {
+        margin-top: 4rem;
+    }
+}
+@media (min-height: 800px) {
+    .break {
+        margin-top: 5rem;
+    }
+}
+
+@media (min-height: 890px) {
+    .break {
+        margin-top: 6rem;
+    }
+}
+@media (min-height: 910px) {
+    .break {
+        margin-top: 8rem;
+    }
+}
+@media (min-height: 1000px) {
+    .break {
+        margin-top: clamp(22rem, 25vh + 1rem, 40rem);
+    }
 }
 
 @media (max-width: 380px) {
@@ -212,9 +245,10 @@
         margin-top: 20%;
     }
 }
+
 .break-text {
     font-size: 1.125rem;
-    direction: rtl ;
+    direction: rtl;
 }
 
 .arrow-down {
@@ -223,13 +257,18 @@
 }
 
 @keyframes jumpInfinite {
-  0% {
-    transform: translateY(0); /* Start at original position */
-  }
-  50% {
-    transform: translateY(-20px); /* Move upwards by 20px */
-  }
-  100% {
-    transform: translateY(0); /* Return to original position */
-  }
+    0% {
+        transform: translateY(0);
+        /* Start at original position */
+    }
+
+    50% {
+        transform: translateY(-20px);
+        /* Move upwards by 20px */
+    }
+
+    100% {
+        transform: translateY(0);
+        /* Return to original position */
+    }
 }
