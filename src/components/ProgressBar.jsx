@@ -4,8 +4,8 @@ import LinearProgress, {
   linearProgressClasses,
 } from "@mui/material/LinearProgress";
 
-function ProgressBar() {
-  const [progress, setProgress] = React.useState(30);
+function ProgressBar({numerator, denominator}) {
+  const [progress, setProgress] = React.useState(numerator / denominator * 100);
 
   const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
     height: 10,

@@ -1,0 +1,38 @@
+import ProgressBar from "../components/ProgressBar";
+import arrowBack from "../assets/arrow-back.svg";
+import Car from "../assets/car.svg";
+import AnswerButtons from "../components/AnswerButtons";
+import { useState } from "react";
+
+function QuizzData({ currentQuestion, setCurrentQuestion, questionsLength, mockData, setScore }) {
+    const [isCarSeen, setIsCarSeen] = useState(false);
+
+    return (
+        <>
+            <div className="upper-section">
+                <div className="content-container">
+                    <div className="progress-and-action-bar">
+                        <div className="actions-bar">
+                            <img src={arrowBack} alt="arrow-back" />
+                            <p className="question-number">{currentQuestion + 1 + '/' + questionsLength}</p>
+                        </div>
+                        <ProgressBar numerator={currentQuestion + 1} denominator={questionsLength} />
+                    </div>
+                    <div className="text">{mockData.questions[currentQuestion].question}</div>
+                </div>
+            </div>
+            <div className="answers">
+                {!isCarSeen ? <div className="car-part">
+                    <div className="illustration-car">
+                        <img src={Car} alt="Car Illustration" className="svg-car" />
+                    </div>
+                    <button className="button-hosen" style={{ marginBottom: "3rem" }} onClick={() => setIsCarSeen(true)}>
+                        להתחלת המבחן
+                    </button>
+                </div> : <AnswerButtons options={mockData.questions[currentQuestion].options} setScore={setScore} setCurrentQuestion={setCurrentQuestion}/>}
+            </div >
+        </>
+    )
+}
+
+export default QuizzData;

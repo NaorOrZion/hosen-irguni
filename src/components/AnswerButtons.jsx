@@ -1,13 +1,21 @@
-import * as React from 'react';
+import { useState } from "react";
 
-function AnswerButtons() {
+function AnswerButtons({options, setScore, setCurrentQuestion}) {
+  const [currentSelectedScore, setCurrentSelectedScore] = useState(0);
   return (
-    <div className="answer-buttons">
-      <button className="answer-button">הצוות תרגל לאחרונה, אבל תכלס יש מה להשתפר...</button>
-      <button className="answer-button">הצוות סיים תרגל לאחרונה, מכיר את הנהלים ויודע לאן נוסעים</button>
-      <button className="answer-button">הצוות לא הוכשר למשימה הנוכחית</button>
-      <button className="answer-button">פנס רוורס לא עובד – הצוות תרגל לאחרונה, רק</button>
-    </div>
+    <>
+      <div className="answers-fade" />
+      <div className="answers-scroll">
+        <div className="answer-buttons">
+          {options.map((option, index) => (
+            <button key={index} className="answer-button" onClick={() => {setCurrentSelectedScore(option.score)}}>{option.question}</button>
+          ))}
+        </div>
+        <button className="button-hosen" style={{ marginBottom: "3rem" }} onClick={() => {setScore(prev => prev + currentSelectedScore); setCurrentQuestion(prev => prev + 1)}}>
+          לשאלה הבאה
+        </button>
+      </div>
+    </>
   );
 }
 
