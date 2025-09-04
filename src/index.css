@@ -9,10 +9,10 @@
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
   
-  --fs-heading: clamp(3rem, 12vw + 1rem, 4.5rem);
-  --fs-subheading: clamp(1.5rem, 6vw + 1rem, 1.5rem);
-  --fs-body: clamp(1.125rem, 4vw + 1rem, 1.125rem);
-  --fs-button: clamp(1.25rem, 12vw + 1rem, 1.5rem);
+  --fs-heading: 3rem;
+  --fs-subheading: 1.5rem;
+  --fs-body: 1.125rem;
+  --fs-button: 1.5rem;
 
   /* font-synthesis: none;
   text-rendering: optimizeLegibility;
