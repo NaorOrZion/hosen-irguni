@@ -1,6 +1,6 @@
 import ProgressBar from "../components/ProgressBar";
 import arrowBack from "../assets/arrow-back.svg";
-import Car from "../assets/car.svg";
+import Car from "../assets/Car.svg";
 import AnswerButtons from "../components/AnswerButtons";
 import { useState } from "react";
 
