@@ -36,7 +36,7 @@ function FinalScore({ score }) {
 
     return (
         <div className="final-score">
-            <img src={getLightIcon()} alt="score light" style={{ width: "13rem" }} className="score-light" />
+            <img src={getLightIcon()} alt="score light" style={{ width: "11rem" }} className="score-light" />
             <div className="text-box">
                 <p className="score-text">{textBefore}</p>
                 <p className="score-number">{score}</p>
