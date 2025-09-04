@@ -82,6 +82,7 @@ function QuizzData({
           </div>
         ) : (
           <AnswerButtons
+            key={currentQuestion}
             options={mockData.questions[currentQuestion].options}
             buttonTextNext={mockData.buttonTextNext}
             extraClass={

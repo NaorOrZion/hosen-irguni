@@ -11,7 +11,7 @@
   max-width: 20rem;
   margin: 0 auto;
   min-height: 400px; /* Minimum height instead of fixed height */
-  overflow: hidden; /* Hide sliding overflow */
+  overflow: auto; /* Hide sliding overflow */
 }
 
 .card {
