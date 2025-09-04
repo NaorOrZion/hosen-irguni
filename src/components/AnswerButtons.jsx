@@ -1,17 +1,36 @@
 import { useState } from "react";
 
-function AnswerButtons({options, setScore, setCurrentQuestion}) {
+function AnswerButtons({ options, extraClass = "", onNext, onAnimationEnd }) {
   const [currentSelectedScore, setCurrentSelectedScore] = useState(0);
   return (
     <>
       <div className="answers-fade" />
       <div className="answers-scroll">
-        <div className="answer-buttons">
+        <div
+          className={`answer-buttons ${extraClass}`}
+          onAnimationEnd={onAnimationEnd}
+        >
           {options.map((option, index) => (
-            <button key={index} className="answer-button" onClick={() => {setCurrentSelectedScore(option.score)}}>{option.question}</button>
+            <button
+              key={index}
+              className="answer-button"
+              onClick={() => {
+                setCurrentSelectedScore(option.score);
+              }}
+            >
+              {option.question}
+            </button>
           ))}
         </div>
-        <button className="button-hosen" style={{ marginBottom: "3rem" }} onClick={() => {setScore(prev => [...prev, parseInt(currentSelectedScore)]); setCurrentQuestion(prev => prev + 1)}}>
+        <button
+          className="button-hosen"
+          style={{ marginBottom: "3rem" }}
+          onClick={() => {
+            if (typeof onNext === "function") {
+              onNext(parseInt(currentSelectedScore));
+            }
+          }}
+        >
           לשאלה הבאה
         </button>
       </div>

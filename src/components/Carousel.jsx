@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import "../style/Carousel.css";
 import Tank from "../assets/tank.svg";
 import carIcon from "../assets/mini-car-icon.svg";
@@ -8,6 +8,12 @@ import driverIcon from "../assets/driver-icon.svg";
 
 function Carousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [animationPhase, setAnimationPhase] = useState("in"); // 'in' | 'out'
+  const [direction, setDirection] = useState("right"); // 'right' (next) | 'left' (prev)
+  const [pendingIndex, setPendingIndex] = useState(null);
+  const startXRef = useRef(null);
+  const isPointerDownRef = useRef(false);
+  const SWIPE_THRESHOLD_PX = 50;
 
   const cards = [
     {
@@ -41,23 +47,87 @@ function Carousel() {
   ];
 
   const nextCard = () => {
-    setCurrentIndex((prev) => (prev + 1) % cards.length);
+    if (animationPhase === "out") return;
+    const target = (currentIndex + 1) % cards.length;
+    setDirection("right");
+    setPendingIndex(target);
+    setAnimationPhase("out");
   };
 
   const prevCard = () => {
-    setCurrentIndex((prev) => (prev - 1 + cards.length) % cards.length);
+    if (animationPhase === "out") return;
+    const target = (currentIndex - 1 + cards.length) % cards.length;
+    setDirection("left");
+    setPendingIndex(target);
+    setAnimationPhase("out");
   };
 
   const goToCard = (index) => {
-    setCurrentIndex(index);
+    if (index === currentIndex || animationPhase === "out") return;
+    const dir = index > currentIndex ? "right" : "left";
+    setDirection(dir);
+    setPendingIndex(index);
+    setAnimationPhase("out");
   };
 
   const currentCard = cards[currentIndex];
 
+  const handleAnimationEnd = () => {
+    if (animationPhase === "out") {
+      if (pendingIndex !== null) {
+        setCurrentIndex(pendingIndex);
+      }
+      setAnimationPhase("in");
+      setPendingIndex(null);
+    }
+  };
+
+  const cardAnimationClass =
+    animationPhase === "out"
+      ? direction === "right"
+        ? "slide-out-left"
+        : "slide-out-right"
+      : direction === "right"
+      ? "slide-in-right"
+      : "slide-in-left";
+
+  // Touch/Mouse swipe handlers
+  const onTouchStart = (e) => {
+    if (animationPhase === "out") return;
+    const x = e.touches ? e.touches[0].clientX : e.clientX;
+    startXRef.current = x;
+    isPointerDownRef.current = true;
+  };
+
+  const onTouchEnd = (e) => {
+    if (!isPointerDownRef.current || animationPhase === "out") return;
+    const endX = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
+    const deltaX = endX - (startXRef.current ?? endX);
+    isPointerDownRef.current = false;
+    startXRef.current = null;
+    if (Math.abs(deltaX) < SWIPE_THRESHOLD_PX) return;
+    if (deltaX < 0) {
+      // swipe left → next
+      nextCard();
+    } else {
+      // swipe right → prev
+      prevCard();
+    }
+  };
+
   return (
     <div className="carousel-wrapper">
-      <div className="card-container">
-        <div className="card">
+      <div
+        className="card-container"
+        onTouchStart={onTouchStart}
+        onTouchEnd={onTouchEnd}
+        onMouseDown={onTouchStart}
+        onMouseUp={onTouchEnd}
+      >
+        <div
+          className={`card ${cardAnimationClass}`}
+          onAnimationEnd={handleAnimationEnd}
+        >
           <div className="card-header">
             <img className="card-icon" src={currentCard.icon} />
             <h3 className="card-title">{currentCard.title}</h3>
@@ -74,9 +144,6 @@ function Carousel() {
       </div>
 
       <div className="card-navigation">
-        <button className="nav-button prev" onClick={prevCard}>
-          ‹
-        </button>
 
         <div className="pagination-dots">
           {cards.map((_, index) => (
@@ -87,10 +154,6 @@ function Carousel() {
             />
           ))}
         </div>
-
-        <button className="nav-button next" onClick={nextCard}>
-          ›
-        </button>
       </div>
     </div>
   );

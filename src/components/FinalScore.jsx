@@ -14,7 +14,7 @@ function FinalScore({ score }) {
     const getLightIcon = () => {
         if (score >= 80) {
             return greenLightIcon;
-        } else if (score >= 50) {
+        } else if (score >= 75) {
             return yellowLightIcon;
         } else {
             return redLightIcon;

@@ -6,6 +6,20 @@
     direction: rtl;
     margin-top: 10%;
     gap: 2.875rem;
+
+    opacity: 0;
+    transform: translateY(-50px);
+    /* start above */
+    animation: fadeInDown 1s ease forwards;
+    /* play once */
+}
+
+@keyframes fadeInDown {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        /* back to normal position */
+    }
 }
 
 .score-number {

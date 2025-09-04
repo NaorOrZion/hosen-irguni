@@ -11,6 +11,7 @@
   max-width: 20rem;
   margin: 0 auto;
   min-height: 400px; /* Minimum height instead of fixed height */
+  overflow: hidden; /* Hide sliding overflow */
 }
 
 .card {
@@ -24,6 +25,67 @@
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
+}
+
+/* Slide animations */
+.card.slide-in-right {
+  animation: cardSlideInRight 100ms ease both;
+}
+
+.card.slide-in-left {
+  animation: cardSlideInLeft 100ms ease both;
+}
+
+.card.slide-out-left {
+  animation: cardSlideOutLeft 100ms ease both;
+}
+
+.card.slide-out-right {
+  animation: cardSlideOutRight 100ms ease both;
+}
+
+@keyframes cardSlideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0.001;
+  }
+  to {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+}
+
+@keyframes cardSlideInLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0.001;
+  }
+  to {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+}
+
+@keyframes cardSlideOutLeft {
+  from {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-100%);
+    opacity: 0.001;
+  }
+}
+
+@keyframes cardSlideOutRight {
+  from {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0.001;
+  }
 }
 
 .card-header {
