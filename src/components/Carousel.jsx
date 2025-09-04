@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import "../style/Carousel.css";
-import Tank from "../assets/tank.svg";
+import Tank from "../assets/Tank.svg";
 import carIcon from "../assets/mini-car-icon.svg";
 import wheelIcon from "../assets/wheel-icon.svg";
 import roadIcon from "../assets/road-icon.svg";
