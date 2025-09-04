@@ -1,7 +1,7 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './pages/home.jsx'; // Assuming you have a Home component
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home.jsx";
 
-import { Quizz2 } from './pages/Quizz2.jsx';
+import { Quizz2 } from "./pages/Quizz2.jsx";
 
 function App() {
   return (
