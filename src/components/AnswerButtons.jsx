@@ -1,6 +1,5 @@
 import { useState } from "react";
-
-function AnswerButtons({ options, extraClass = "", onNext, onAnimationEnd }) {
+function AnswerButtons({ options, buttonTextNext, extraClass = "", onNext, onAnimationEnd }) {
   const [currentSelectedScore, setCurrentSelectedScore] = useState(0);
   const [selectedIndex, setSelectedIndex] = useState(-1);
   return (
@@ -33,7 +32,7 @@ function AnswerButtons({ options, extraClass = "", onNext, onAnimationEnd }) {
             }
           }}
         >
-          לשאלה הבאה
+          {buttonTextNext}
         </button>
       </div>
     </>

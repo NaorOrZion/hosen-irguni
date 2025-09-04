@@ -2,6 +2,7 @@ import "../style/Quizz2.css"
 import QuizzData from "../components/QuizzData";
 import FinalContent from "../components/FinalContent";
 import mockData from "../mockData.json";
+import { useAppData } from "../realData";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -10,7 +11,9 @@ export const Quizz2 = () => {
     const [totalScore, setTotalScore] = useState(0);
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [isCarSeen, setIsCarSeen] = useState(false);
-    const questionsLength = mockData.questions.length;
+    const { data, loading, error } = useAppData(mockData);
+    const activeData = (data && Array.isArray(data.questions)) ? data : (Array.isArray(mockData?.questions) ? mockData : { questions: [] });
+    const questionsLength = activeData.questions.length;
     const isDone = currentQuestion >= questionsLength;
     const navigate = useNavigate();
 
@@ -44,7 +47,7 @@ export const Quizz2 = () => {
                         currentQuestion,
                         setCurrentQuestion,
                         questionsLength,
-                        mockData,
+                        mockData: activeData,
                         setScore,
                         isCarSeen,
                         setIsCarSeen,

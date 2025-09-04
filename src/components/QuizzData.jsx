@@ -77,12 +77,13 @@ function QuizzData({
                 setIsCarSeen(true);
               }}
             >
-              להתחלת המבחן
+              {mockData.buttonTextStart}
             </button>
           </div>
         ) : (
           <AnswerButtons
             options={mockData.questions[currentQuestion].options}
+            buttonTextNext={mockData.buttonTextNext}
             extraClass={
               animationPhase === "out" ? "slide-out-left" : "slide-in-right"
             }

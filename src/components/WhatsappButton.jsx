@@ -1,9 +1,12 @@
 import React from "react";
 import whatsappIcon from "../assets/whatsapp-icon.svg";
+import mockData from "../mockData.json";
+import { useAppData } from "../realData";
 
 function WhatsAppButton() {
-  const phoneNumber = "+972524331846"; // your number with country code
-  const message = "היי מדור חוסן ארגוני, יש לי שאלה...";
+  const { data } = useAppData(mockData);
+  const phoneNumber = (data ?? mockData).phoneNumber;
+  const message = (data ?? mockData).whatsappText;
   const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
   return (

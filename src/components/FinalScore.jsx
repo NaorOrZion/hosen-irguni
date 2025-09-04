@@ -3,16 +3,19 @@ import "../style/FinalScore.css"
 import greenLightIcon from "../assets/green-light.svg";
 import yellowLightIcon from "../assets/yellow-light.svg";
 import redLightIcon from "../assets/red-light.svg";
+import mockData from "../mockData.json";
+import { useAppData } from "../realData";
 
 function FinalScore({ score }) {
-    const greatText = "אתה בכיוון הנכון, הצוות איתך, המשך כך!";
-    const okText = "שווה לעצור לתדלוק – יש מה לשפר...";
-    const badText = "עצור! כנס למוסך מהר אתה חייב תחזוקה במיידי";
-    // const badText = "עצור! כנס למוסך מהר אתה חייב תחזוקה במיידי";
-    const textBefore = "ניקוד סופי:";
+    const { data } = useAppData(mockData);
+    const active = data ?? mockData;
+    const greatText = active.greatText;
+    const okText = active.okText;
+    const badText = active.badText;
+    const textBefore = active.textBeforeGrade;
 
     const getLightIcon = () => {
-        if (score >= 80) {
+        if (score >= 85) {
             return greenLightIcon;
         } else if (score >= 75) {
             return yellowLightIcon;
@@ -22,9 +25,9 @@ function FinalScore({ score }) {
     };
 
     const getLightText = () => {
-        if (score >= 80) {
+        if (score >= 85) {
             return greatText;
-        } else if (score >= 50) {
+        } else if (score >= 75) {
             return okText;
         } else {
             return badText;

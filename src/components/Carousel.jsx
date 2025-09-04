@@ -1,12 +1,15 @@
 import React, { useRef, useState } from "react";
 import "../style/Carousel.css";
 import Tank from "../assets/Tank.svg";
-import carIcon from "../assets/mini-car-icon.svg";
-import wheelIcon from "../assets/wheel-icon.svg";
-import roadIcon from "../assets/road-icon.svg";
-import driverIcon from "../assets/driver-icon.svg";
+import mockData from "../mockData.json";
+import { useAppData } from "../realData";
+import MiniCarIcon from "../assets/mini-car-icon.svg";
+import WheelIcon from "../assets/wheel-icon.svg";
+import RoadIcon from "../assets/road-icon.svg";
+import DriverIcon from "../assets/driver-icon.svg";
 
 function Carousel() {
+  const { data } = useAppData(mockData);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [animationPhase, setAnimationPhase] = useState("in"); // 'in' | 'out'
   const [direction, setDirection] = useState("right"); // 'right' (next) | 'left' (prev)
@@ -15,36 +18,14 @@ function Carousel() {
   const isPointerDownRef = useRef(false);
   const SWIPE_THRESHOLD_PX = 50;
 
-  const cards = [
-    {
-      id: 1,
-      title: "הרכב עצמו",
-      content:
-        "יש לרכב טסט? ביטוח? כמה הוא יודע להאיץ? או לבלום אם פתאום צריך? (החוסן הארגוני של היחידה – מורכב ממוכנות וגמישות)",
-      icon: carIcon,
-    },
-    {
-      id: 2,
-      title: "תמיכה בנסיעה",
-      content:
-        "המוזיקה, הנוסעים, הדלק ואפילו אפליקציית החניה. (המשאבים של היחידה - התרבות, הערכים, התמיכה בבית ועוד...)",
-      icon: wheelIcon,
-    },
-    {
-      id: 3,
-      title: "תנאי הדרך",
-      content:
-        "האם חם היום? יש חסימה בכביש? ערפל? חשש גדול שנאחר? (הלחצים – כל מה שמשפיע עלי ולא בשליטתי)",
-      icon: roadIcon,
-    },
-    {
-      id: 4,
-      title: "וכמובן, הנהג",
-      content:
-        "נהג ותיק או חדש? הוא ישן בלילה או חגג במסיבה? (מנהיגות – המפקד כמחולל, מודל ומתווך חוסן)",
-      icon: driverIcon,
-    },
-  ];
+  const cards = (data ?? mockData).CarouselData;
+
+  const iconMap = {
+    1: MiniCarIcon,
+    2: WheelIcon,
+    3: RoadIcon,
+    4: DriverIcon,
+  };
 
   const nextCard = () => {
     if (animationPhase === "out") return;
@@ -129,7 +110,7 @@ function Carousel() {
           onAnimationEnd={handleAnimationEnd}
         >
           <div className="card-header">
-            <img className="card-icon" src={currentCard.icon} />
+            <img className="card-icon" src={iconMap[currentCard.id]} />
             <h3 className="card-title">{currentCard.title}</h3>
           </div>
 

@@ -1,8 +1,11 @@
 import "../style/FinalBar.css";
 import homeIcon from "../assets/home.svg";
 import shareIcon from "../assets/share.svg";
+import mockData from "../mockData.json";
+import { useAppData } from "../realData";
 
 function FinalBar({ score }) {
+  const { data } = useAppData(mockData);
   const handleShare = async () => {
     const title = document.title || "מדור חוסן ארגוני";
     const url = window.location.href;
@@ -49,7 +52,7 @@ function FinalBar({ score }) {
             color: "#ffffff",
           }}
         >
-          <p className="backhome-text">לעמוד הראשי</p>
+          <p className="backhome-text">{(data ?? mockData).backHomeText}</p>
           <img src={homeIcon} alt="home button" className="home-icon" />
         </a>
       </div>
