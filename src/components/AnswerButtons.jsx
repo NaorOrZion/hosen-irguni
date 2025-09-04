@@ -11,7 +11,7 @@ function AnswerButtons({options, setScore, setCurrentQuestion}) {
             <button key={index} className="answer-button" onClick={() => {setCurrentSelectedScore(option.score)}}>{option.question}</button>
           ))}
         </div>
-        <button className="button-hosen" style={{ marginBottom: "3rem" }} onClick={() => {setScore(prev => prev + currentSelectedScore); setCurrentQuestion(prev => prev + 1)}}>
+        <button className="button-hosen" style={{ marginBottom: "3rem" }} onClick={() => {setScore(prev => [...prev, parseInt(currentSelectedScore)]); setCurrentQuestion(prev => prev + 1)}}>
           לשאלה הבאה
         </button>
       </div>

@@ -5,8 +5,6 @@ import LinearProgress, {
 } from "@mui/material/LinearProgress";
 
 function ProgressBar({numerator, denominator}) {
-  const [progress, setProgress] = React.useState(numerator / denominator * 100);
-
   const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
     height: 10,
     borderRadius: 10,
@@ -27,7 +25,7 @@ function ProgressBar({numerator, denominator}) {
 
   return (
     <div className="progress-bar">
-      <BorderLinearProgress variant="determinate" value={progress} />
+      <BorderLinearProgress variant="determinate" value={numerator / denominator * 100} />
     </div>
   );
 }
