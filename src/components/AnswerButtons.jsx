@@ -2,6 +2,7 @@ import { useState } from "react";
 
 function AnswerButtons({ options, extraClass = "", onNext, onAnimationEnd }) {
   const [currentSelectedScore, setCurrentSelectedScore] = useState(0);
+  const [selectedIndex, setSelectedIndex] = useState(-1);
   return (
     <>
       <div className="answers-fade" />
@@ -13,9 +14,10 @@ function AnswerButtons({ options, extraClass = "", onNext, onAnimationEnd }) {
           {options.map((option, index) => (
             <button
               key={index}
-              className="answer-button"
+              className={`answer-button ${selectedIndex === index ? "answer-button-focus" : ""}`}
               onClick={() => {
                 setCurrentSelectedScore(option.score);
+                setSelectedIndex(index);
               }}
             >
               {option.question}

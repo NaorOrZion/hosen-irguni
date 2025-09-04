@@ -3,6 +3,7 @@ import Carousel from "../components/Carousel";
 import FinalBar from "../components/FinalBar";
 import FinalScore from "../components/FinalScore";
 import WhatsAppButton from "../components/WhatsappButton";
+import mockData from "../mockData.json";
 
 function FinalContent({ score }) {
     return (
@@ -10,7 +11,7 @@ function FinalContent({ score }) {
             <FinalBar score={score} />
             <FinalScore score={score} />
             <div className="break">
-                <p className="break-text">מה זה אומר עליי?</p>
+                <p className="break-text">{mockData.FinalPageMiniText}</p>
                 <img src={arrowDownGreen} alt="arrow-down" className="arrow-down" />
             </div>
             <Carousel />

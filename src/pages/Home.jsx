@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import hosenLogo from '../assets/LOGO.svg'
 import '../style/Home.css'
+import mockData from "../mockData.json"
 
 function Home() {
   const navigate = useNavigate()
@@ -12,16 +13,14 @@ function Home() {
         <img src={hosenLogo} className="logo" alt="Hosen irguni logo" />
       </div>
       <div className="headline-container">
-        <h1 className="heading-h1">המבחן האולטימטיבי לחוסן ארגוני</h1>
+        <h1 className="heading-h1">{mockData.mainAppTitle}</h1>
         <p className="subheading-p">
-          גלו האם אתם מיישמים את
-          עקרונות החוסן הארגוני
-          ביחידה שלכם
+        {mockData.mainAppSubheading}
         </p>
       </div>
       <div className="button-placement">
         <button className="button-hosen" onClick={() => navigate('/quizz')}>
-          להתחלת המבחן
+        {mockData.buttonTextHome}
         </button>
       </div>
       <span className="white-circle"></span>

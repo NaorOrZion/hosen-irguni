@@ -162,6 +162,10 @@
 }
 
 .answer-button:focus {
+  outline: none;
+}
+
+.answer-button-focus {
   background-color: #ffffff;
   cursor: pointer;
   border: none;
