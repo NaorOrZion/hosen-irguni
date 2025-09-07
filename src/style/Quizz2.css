@@ -327,6 +327,13 @@
   animation: jumpInfinite 1.5s infinite;
 }
 
+.greenBackground {
+  background-color: #384d22;
+  border-radius: 0 0 120px 120px;
+  padding-bottom: 40px;
+  padding-top: 30px;
+}
+
 @keyframes jumpInfinite {
   0% {
     transform: translateY(0);

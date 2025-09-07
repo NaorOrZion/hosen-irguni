@@ -1,0 +1,41 @@
+.site-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 1rem 1.5rem;
+    box-sizing: border-box;
+    background: transparent;
+    color: white;
+}
+
+.footer-whatsapp {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: #384D22;
+    color: #fff;
+    text-decoration: none;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.625rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+}
+
+.footer-whatsapp-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.footer-whatsapp-text {
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.footer-made-by {
+    font-size: 0.875rem;
+}
+
+

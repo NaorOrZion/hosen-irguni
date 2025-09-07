@@ -154,6 +154,7 @@ export async function fetchAppData(urls = SHEET_URLS) {
     greatText: general["greatText"] ?? "",
     okText: general["okText"] ?? "",
     badText: general["badText"] ?? "",
+    backHomeText: general["backHomeText"] ?? "",
     textBeforeGrade: general["textBeforeGrade"] ?? "",
     phoneNumber: general["phoneNumber"] ?? "",
     questions,
