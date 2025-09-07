@@ -5,11 +5,13 @@ import FinalScore from "../components/FinalScore";
 import WhatsAppButton from "../components/WhatsappButton";
 import mockData from "../mockData.json";
 import { useAppData } from "../realData";
+import "../style/Quizz2.css"
 
 function FinalContent({ score }) {
     const { data } = useAppData(mockData);
     return (
         <div className="final-content">
+            <div className={"circle circle-move"}></div>
             <FinalBar score={score} />
             <FinalScore score={score} />
             <div className="break">

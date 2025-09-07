@@ -1,29 +1,32 @@
 import { useState } from "react";
-function AnswerButtons({ options, buttonTextNext, extraClass = "", onNext, onAnimationEnd }) {
-  const [currentSelectedScore, setCurrentSelectedScore] = useState(0);
+function AnswerButtons({ options, buttonTextNext, extraClass = "", onNext, onAnimationEnd, setCurrentSelectedScore }) {
   const [selectedIndex, setSelectedIndex] = useState(-1);
   return (
     <>
       <div className="answers-fade" />
-      <div className="answers-scroll">
-        <div
-          className={`answer-buttons ${extraClass}`}
-          onAnimationEnd={onAnimationEnd}
-        >
-          {options.map((option, index) => (
-            <button
-              key={index}
-              className={`answer-button ${selectedIndex === index ? "answer-button-focus" : ""}`}
-              onClick={() => {
-                setCurrentSelectedScore(option.score);
-                setSelectedIndex(index);
-              }}
-            >
-              {option.question}
-            </button>
-          ))}
-        </div>
-        <button
+      <div
+        className={`answer-buttons ${extraClass}`}
+        onAnimationEnd={() => {
+          if (typeof onAnimationEnd === "function") {
+            onAnimationEnd();
+          }
+        }}
+      >
+        {options.map((option, index) => (
+          <button
+            key={index}
+            className={`answer-button ${selectedIndex === index ? "answer-button-focus" : ""}`}
+            onClick={() => {
+              setCurrentSelectedScore(option.score);
+              setSelectedIndex(index);
+            }}
+          >
+            {option.question}
+          </button>
+        ))}
+      </div>
+       
+        {/* <button
           className="button-hosen"
           style={{ marginBottom: "3rem" }}
           onClick={() => {
@@ -33,8 +36,8 @@ function AnswerButtons({ options, buttonTextNext, extraClass = "", onNext, onAni
           }}
         >
           {buttonTextNext}
-        </button>
-      </div>
+        </button> */}
+  
     </>
   );
 }

@@ -2,11 +2,11 @@
   height: 100vh;
   width: 100vw;
   color: white;
-  display: flex;
-  flex-direction: column;
   overflow-y: auto;
   overflow-x: hidden;
   position: relative; /* Add this to establish positioning context */
+  display: flex;
+  flex-direction: column;
 }
 
 .upper-section {
@@ -19,24 +19,32 @@
   top: 0;
   z-index: 2;
   background: transparent;
+  padding-bottom: 4vh;
 }
 
 .circle {
   position: absolute; /* Change from fixed to absolute */
+
   width: 110vmax;
-  height: 105vmax;
+  /* Makes it cover width/height proportionally */
+  height: 104vmax;
   background: #384d22;
+  /* Circle color */
   border-radius: 50%;
-  top: 12%;
+  position: absolute;
+  bottom: 0;
   left: 50%;
-  transform: translate(-50%, -80%);
-  z-index: 2;
+  transform: translateX(-50%);
+  z-index: -1;
+  /* Places it behind other content */
+  overflow: hidden;
+  /* Ensures no scrollbars appear */
   pointer-events: none;
   transition: top 0.8s ease;
 }
 
 .circle.circle-move {
-  top: 60%;
+  top: -30%;
 }
 
 .small-circle {
@@ -82,7 +90,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 4rem;
+  gap:4vh;
   padding: 1rem;
 }
 
@@ -106,7 +114,7 @@
 }
 
 .answers {
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
@@ -116,9 +124,24 @@
   margin-top: 1rem;
   height: 100%;
   flex: 1 1 0;
-  z-index: 1;
+  z-index: 1; */
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5vh;
+  padding-top: 2vh;
 }
 
+.answers-content {
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+}
 .answers-scroll {
   width: 100%;
   display: flex;
@@ -151,10 +174,11 @@
 }
 
 .answer-button {
-  padding-top: 1.25rem;
+  /* padding-top: 1.25rem;
   padding-bottom: 1.25rem;
   padding-left: 1.875rem;
-  padding-right: 1.875rem;
+  padding-right: 1.875rem; */
+  width: 80%;
   border-radius: 1.563rem;
 
   color: #384d22;
@@ -185,13 +209,12 @@
 }
 
 .car-part {
-  justify-content: center;
+  /* justify-content: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 9rem;
-  margin-top: 40%;
-  overflow-y: auto;
+  overflow-y: auto; */
 }
 
 .svg-car {
@@ -202,6 +225,9 @@
 /* animations for swapping answer buttons */
 .answer-buttons.slide-in-right {
   animation: answerSlideInRight 300ms ease both;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .answer-buttons.slide-out-left {
@@ -278,7 +304,7 @@
   }
 }
 
-@media (max-width: 380px) {
+/* @media (max-width: 380px) {
   .circle {
     width: 150vmax;
     height: 110vmax;
@@ -289,7 +315,7 @@
     gap: 6rem;
     margin-top: 20%;
   }
-}
+} */
 
 .break-text {
   font-size: 1.125rem;

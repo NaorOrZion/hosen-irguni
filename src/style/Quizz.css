@@ -90,12 +90,14 @@
 }
 
 .answer-button {
-  padding: 1.25rem;
+  /* padding: 1.25rem;
   font-size: var(--fs-body);
   border-radius: 25px;
   font-weight: regular;
   color: #384D22;
   overflow-y: auto;
+  width: 80%; */
+  width: 80%;
 }
 
 @media (min-width: 40em) {

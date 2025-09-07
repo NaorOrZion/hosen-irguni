@@ -38,7 +38,7 @@ export const Quizz2 = () => {
     return (
         <div className="quizz-page">
             <div className={`small-circle ${isDone ? 'move-left' : ''}`}></div>
-            <div className={`circle ${isDone ? 'circle-move' : ''}`}></div>
+            
             {isDone ? (
                 <FinalContent score={totalScore} />
             ) : (
@@ -53,6 +53,7 @@ export const Quizz2 = () => {
                         setIsCarSeen,
                         score,
                         handleBack,
+                        isDone,
                     }}
                 />
             )}

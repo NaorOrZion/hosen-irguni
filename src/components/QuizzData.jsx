@@ -14,9 +14,11 @@ function QuizzData({
   setIsCarSeen,
   score,
   handleBack,
+  isDone,
 }) {
   const [animationPhase, setAnimationPhase] = useState("in");
   const [queuedScore, setQueuedScore] = useState(null);
+  const [currentSelectedScore, setCurrentSelectedScore] = useState(0);
 
   const handleNext = (selectedScore) => {
     setQueuedScore(selectedScore);
@@ -36,6 +38,7 @@ function QuizzData({
   return (
     <>
       <div className="upper-section">
+        <div className={`circle ${isDone ? 'circle-move' : ''}`}></div>
         <div className="content-container">
           <div className="progress-and-action-bar">
             <div className="actions-bar">
@@ -65,21 +68,9 @@ function QuizzData({
         </div>
       </div>
       <div className="answers">
+        <div className="answers-content">
         {!isCarSeen ? (
-          <div className="car-part">
-            <div className="illustration-car">
-              <img src={Car} alt="Car Illustration" className="svg-car" />
-            </div>
-            <button
-              className="button-hosen"
-              style={{ marginBottom: "3rem" }}
-              onClick={() => {
-                setIsCarSeen(true);
-              }}
-            >
-              {mockData.buttonTextStart}
-            </button>
-          </div>
+            < img src={Car} alt="Car Illustration" className="svg-car" />
         ) : (
           <AnswerButtons
             key={currentQuestion}
@@ -90,9 +81,26 @@ function QuizzData({
             }
             onNext={handleNext}
             onAnimationEnd={handleAnswersAnimationEnd}
-          />
+            setCurrentSelectedScore={setCurrentSelectedScore}
+            />
         )}
+        </div>
+        <button
+          className="button-hosen"
+          onClick={() => {
+            if (!isCarSeen) {
+              setIsCarSeen(true);
+              return;
+            }
+            if (typeof handleNext === "function") {
+              handleNext(parseInt(currentSelectedScore));
+            }
+          }}
+          >
+          {!isCarSeen ? mockData.buttonTextStart : mockData.buttonTextNext}
+      </button>
       </div>
+      
     </>
   );
 }
