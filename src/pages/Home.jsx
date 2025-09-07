@@ -11,22 +11,20 @@ function Home() {
 
   return (
     <div className="home-page">
-      <div className="logos">
-        <img src={hosenLogo} className="logo" alt="Hosen irguni logo" />
+      <div className="upper-container">
+          <img src={hosenLogo} className="logo" alt="Hosen irguni logo" />
+          <div className="headline-container">
+            <h1 className="heading-h1">{(data ?? mockData).mainAppTitle}</h1>
+            <p className="subheading-p">
+            {(data ?? mockData).mainAppSubheading}
+            </p>
+          </div>
+          <span className="white-circle"></span>
       </div>
-      <div className="headline-container">
-        <h1 className="heading-h1">{(data ?? mockData).mainAppTitle}</h1>
-        <p className="subheading-p">
-        {(data ?? mockData).mainAppSubheading}
-        </p>
-      </div>
-      <div className="button-placement">
-        <button className="button-hosen" onClick={() => navigate('/quizz')}>
-        {(data ?? mockData).buttonTextHome}
-        </button>
-      </div>
-      <span className="white-circle"></span>
       <span className="deep-green-circle"></span>
+      <button className="button-hosen" onClick={() => navigate('/quizz')}>
+      {(data ?? mockData).buttonTextHome}
+      </button>
     </div>
   )
 }
