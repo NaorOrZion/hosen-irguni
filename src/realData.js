@@ -150,6 +150,7 @@ export async function fetchAppData(urls = SHEET_URLS) {
     carText: general["carText"] ?? "",
     buttonTextNext: general["buttonTextNext"] ?? "",
     buttonTextStart: general["buttonTextStart"] ?? "",
+    shareText: general["shareText"] ?? "",
     greatText: general["greatText"] ?? "",
     okText: general["okText"] ?? "",
     badText: general["badText"] ?? "",
