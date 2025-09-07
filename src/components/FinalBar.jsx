@@ -56,7 +56,7 @@ function FinalBar({ score }) {
         ctx.font = "400 36px system-ui, -apple-system, Segoe UI, Roboto, Arial";
         ctx.fillText(title, width / 2, height - 60);
 
-        const blob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, "image/png", 0.92));
+        const blob = await new Promise((resolve) => canvas.toBlob(resolve, "image/png", 0.92));
         if (!blob) return null;
         return new File([blob], "share.png", { type: "image/png" });
       } catch (_) {
@@ -64,7 +64,27 @@ function FinalBar({ score }) {
       }
     };
 
-    // Prefer native share without image first (fastest path)
+    // Generate the image first
+    const file = await generateShareImage();
+    
+    // Try native share with image first (most important)
+    if (navigator.share && file && navigator.canShare && navigator.canShare({ files: [file] })) {
+      try {
+        await navigator.share({ title, text: message, url, files: [file] });
+        return;
+      } catch (e) {
+        if (e && e.name === "AbortError") return;
+        // If image sharing fails, try without image
+        try {
+          await navigator.share({ title, text: message, url });
+          return;
+        } catch (e2) {
+          if (e2 && e2.name === "AbortError") return;
+        }
+      }
+    }
+
+    // Try native share without image
     if (navigator.share) {
       try {
         await navigator.share({ title, text: message, url });
@@ -74,18 +94,25 @@ function FinalBar({ score }) {
       }
     }
 
-    // If device supports file sharing, try with our generated image
-    try {
-      const file = await generateShareImage();
-      if (file && navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
-        try {
-          await navigator.share({ title, text: message, url, files: [file] });
-          return;
-        } catch (e) {
-          if (e && e.name === "AbortError") return;
-        }
-      }
-    } catch (_) {}
+    // If we have an image but can't share it natively, offer download
+    if (file) {
+      try {
+        // Create download link
+        const downloadUrl = URL.createObjectURL(file);
+        const link = document.createElement("a");
+        link.href = downloadUrl;
+        link.download = "חוסן-ארגוני-ציון.png";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(downloadUrl);
+        
+        // Also copy text to clipboard
+        await navigator.clipboard.writeText(`${message} ${url}`);
+        alert("התמונה הורדה והטקסט הועתק ללוח! אפשר לשתף את התמונה עם הטקסט");
+        return;
+      } catch (_) {}
+    }
 
     // Fallbacks
     try {
