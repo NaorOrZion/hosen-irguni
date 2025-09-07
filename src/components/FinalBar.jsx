@@ -3,72 +3,88 @@ import homeIcon from "../assets/home.svg";
 import shareIcon from "../assets/share.svg";
 import mockData from "../mockData.json";
 import { useAppData } from "../realData";
-// Removed html2canvas – generating a simple, reliable share image via Canvas instead
+import html2canvas from "html2canvas";
 
 function FinalBar({ score }) {
   const { data } = useAppData(mockData);
+
+  const generateWebpageScreenshot = async () => {
+    try {
+      // Wait for any CSS animations to complete (especially FinalScore fade-in)
+      await new Promise((resolve) => setTimeout(resolve, 1200)); // Wait 1.2s for 1s animation + buffer
+
+      // Force all elements to be fully visible before screenshot
+      const allElements = document.querySelectorAll("*");
+      const originalStyles = new Map();
+
+      // Temporarily remove any opacity/transform animations
+      allElements.forEach((el) => {
+        const computedStyle = window.getComputedStyle(el);
+        if (
+          computedStyle.opacity !== "1" ||
+          computedStyle.transform !== "none"
+        ) {
+          originalStyles.set(el, {
+            opacity: el.style.opacity,
+            transform: el.style.transform,
+            animation: el.style.animation,
+          });
+          el.style.opacity = "1";
+          el.style.transform = "none";
+          el.style.animation = "none";
+        }
+      });
+
+      // Capture the entire page
+      const canvas = await html2canvas(document.body, {
+        allowTaint: true,
+        useCORS: true,
+        scale: 1,
+        backgroundColor: "#ffffff",
+        logging: false,
+        width: document.body.scrollWidth,
+        height: document.body.scrollHeight,
+      });
+
+      // Restore original styles
+      originalStyles.forEach((styles, el) => {
+        el.style.opacity = styles.opacity;
+        el.style.transform = styles.transform;
+        el.style.animation = styles.animation;
+      });
+
+      // Convert to blob
+      const blob = await new Promise((resolve) => {
+        canvas.toBlob(resolve, "image/png", 0.9);
+      });
+
+      if (blob) {
+        return new File([blob], "חוסן-ארגוני-צילום-מסך.png", {
+          type: "image/png",
+        });
+      }
+      return null;
+    } catch (error) {
+      console.error("Error taking screenshot:", error);
+      return null;
+    }
+  };
+
   const handleShare = async () => {
     const title = document.title || "מדור חוסן ארגוני";
     const url = window.location.href;
     const message = mockData.shareText;
 
-    // Helper: generate a simple OpenGraph-like image with the score
-    const generateShareImage = async () => {
-      try {
-        const width = 1200; // good preview size
-        const height = 630;
-        const canvas = document.createElement("canvas");
-        canvas.width = width;
-        canvas.height = height;
-        const ctx = canvas.getContext("2d");
-        if (!ctx) return null;
+    // Generate the webpage screenshot
+    const file = await generateWebpageScreenshot();
 
-        // Background
-        ctx.fillStyle = "#ffffff";
-        ctx.fillRect(0, 0, width, height);
-
-        // Green header bar
-        ctx.fillStyle = "#384D22";
-        ctx.fillRect(0, 0, width, 180);
-
-        // Title text
-        ctx.fillStyle = "#ffffff";
-        ctx.font = "bold 64px system-ui, -apple-system, Segoe UI, Roboto, Arial";
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
-        ctx.fillText("חוסן ארגוני", width / 2, 90);
-
-        // Score box
-        ctx.fillStyle = "#506B33";
-        const boxWidth = width - 200;
-        const boxHeight = 260;
-        const boxX = 100;
-        const boxY = 240;
-        ctx.fillRect(boxX, boxY, boxWidth, boxHeight);
-
-        // Score text
-        ctx.fillStyle = "#ffffff";
-        ctx.font = "bold 80px system-ui, -apple-system, Segoe UI, Roboto, Arial";
-        ctx.fillText(`הציון שלי: ${Math.round(Number(score) || 0)}`, width / 2, boxY + boxHeight / 2);
-
-        // Footer text
-        ctx.fillStyle = "#384D22";
-        ctx.font = "400 36px system-ui, -apple-system, Segoe UI, Roboto, Arial";
-        ctx.fillText(title, width / 2, height - 60);
-
-        const blob = await new Promise((resolve) => canvas.toBlob(resolve, "image/png", 0.92));
-        if (!blob) return null;
-        return new File([blob], "share.png", { type: "image/png" });
-      } catch (_) {
-        return null;
-      }
-    };
-
-    // Generate the image first
-    const file = await generateShareImage();
-    
     // Try native share with image first (most important)
-    if (navigator.share && file && navigator.canShare && navigator.canShare({ files: [file] })) {
+    if (
+      navigator.share &&
+      file &&
+      navigator.canShare &&
+      navigator.canShare({ files: [file] })
+    ) {
       try {
         await navigator.share({ title, text: message, url, files: [file] });
         return;
@@ -106,7 +122,7 @@ function FinalBar({ score }) {
         link.click();
         document.body.removeChild(link);
         URL.revokeObjectURL(downloadUrl);
-        
+
         // Also copy text to clipboard
         await navigator.clipboard.writeText(`${message} ${url}`);
         alert("התמונה הורדה והטקסט הועתק ללוח! אפשר לשתף את התמונה עם הטקסט");
@@ -120,6 +136,29 @@ function FinalBar({ score }) {
       alert("הטקסט והקישור הועתקו ללוח! אפשר להדביק ולשתף");
       return;
     } catch (_) {}
+
+    // If we have an image, download it before opening WhatsApp
+    if (file) {
+      try {
+        const downloadUrl = URL.createObjectURL(file);
+        const link = document.createElement("a");
+        link.href = downloadUrl;
+        link.download = "חוסן-ארגוני-ציון.png";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(downloadUrl);
+
+        // Copy text to clipboard for WhatsApp
+        try {
+          await navigator.clipboard.writeText(`${message} ${url}`);
+        } catch (_) {}
+
+        alert(
+          "התמונה הורדה והטקסט הועתק ללוח! פתח את WhatsApp ושתף את התמונה עם הטקסט"
+        );
+      } catch (_) {}
+    }
 
     window.open(
       `https://wa.me/?text=${encodeURIComponent(`${message} ${url}`)}`,
