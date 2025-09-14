@@ -192,7 +192,7 @@
 .answer-button-focus {
   background-color: #ffffff;
   cursor: pointer;
-  border: none;
+  border: 4px solid #506b33;
   box-shadow: 0px 8px 0px #506b33;
   transition: box-shadow 0.2s, transform 0.2s;
   outline: none;

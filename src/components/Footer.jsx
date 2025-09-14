@@ -20,9 +20,9 @@ function Footer() {
                 title="דברו איתנו בוואטסאפ"
             >
                 <img src={whatsappIcon} alt="WhatsApp" className="footer-whatsapp-icon" />
-                <span className="footer-whatsapp-text">חוסן ארגוני</span>
+                <span className="footer-whatsapp-text">לווצאפ</span>
             </a>
-            <span className="footer-made-by">דברו איתנו בווצאפ</span>
+            {/* <span className="footer-made-by">דברו איתנו בווצאפ</span> */}
         </footer>
     );
 }

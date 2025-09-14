@@ -40,7 +40,7 @@ function FinalBar({ score }) {
         allowTaint: true,
         useCORS: true,
         scale: 1,
-        backgroundColor: "#ffffff",
+        backgroundColor: "#73944f",
         logging: false,
         width: document.body.scrollWidth,
         height: document.body.scrollHeight,
