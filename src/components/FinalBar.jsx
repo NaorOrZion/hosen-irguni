@@ -39,7 +39,7 @@ function FinalBar({ score }) {
       const canvas = await html2canvas(document.body, {
         allowTaint: true,
         useCORS: true,
-        scale: 1,
+        scale: window.devicePixelRatio || 1, // <--- THE MAIN FIX
         backgroundColor: "#73944f",
         logging: false,
         width: document.body.scrollWidth,
@@ -127,7 +127,7 @@ function FinalBar({ score }) {
         await navigator.clipboard.writeText(`${message} ${url}`);
         alert("התמונה הורדה והטקסט הועתק ללוח! אפשר לשתף את התמונה עם הטקסט");
         return;
-      } catch (_) {}
+      } catch (_) { }
     }
 
     // Fallbacks
@@ -135,7 +135,7 @@ function FinalBar({ score }) {
       await navigator.clipboard.writeText(`${message} ${url}`);
       alert("הטקסט והקישור הועתקו ללוח! אפשר להדביק ולשתף");
       return;
-    } catch (_) {}
+    } catch (_) { }
 
     // If we have an image, download it before opening WhatsApp
     if (file) {
@@ -152,12 +152,12 @@ function FinalBar({ score }) {
         // Copy text to clipboard for WhatsApp
         try {
           await navigator.clipboard.writeText(`${message} ${url}`);
-        } catch (_) {}
+        } catch (_) { }
 
         alert(
           "התמונה הורדה והטקסט הועתק ללוח! פתח את WhatsApp ושתף את התמונה עם הטקסט"
         );
-      } catch (_) {}
+      } catch (_) { }
     }
 
     window.open(
