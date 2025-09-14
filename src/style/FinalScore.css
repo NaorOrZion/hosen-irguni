@@ -14,6 +14,24 @@
     /* play once */
 }
 
+.final-score {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    direction: rtl;
+    margin-top: 10%;
+    gap: 2.875rem;
+    min-height: 350px;
+    overflow: visible;
+
+    opacity: 0;
+    transform: translateY(-50px);
+    /* start above */
+    animation: fadeInDown 1s ease forwards;
+    /* play once */
+}
+
 @keyframes fadeInDown {
     to {
         opacity: 1;
@@ -45,6 +63,14 @@
 
 .score-light {
     width: 11rem;
+}
+
+.score-light {
+    width: 11rem;
+    max-width: 90vw;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
 }
 
 @media (max-width: 380px) {
