@@ -67,7 +67,7 @@
 
 .score-light {
     width: 11rem;
-    max-width: 90vw;
+    max-width: 40vw;
     object-fit: contain;
     display: block;
     margin: 0 auto;

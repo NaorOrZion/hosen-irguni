@@ -11,19 +11,13 @@ function FinalBar({ score }) {
   const generateWebpageScreenshot = async () => {
     try {
       // Wait for any CSS animations to complete (especially FinalScore fade-in)
-      await new Promise((resolve) => setTimeout(resolve, 1200));
-
-      // Shrink the SVG before screenshot
-      const scoreLight = document.querySelector('.score-light');
-      let originalWidth = null;
-      if (scoreLight) {
-        originalWidth = scoreLight.style.width;
-        scoreLight.style.width = '7rem';
-      }
+      await new Promise((resolve) => setTimeout(resolve, 1200)); // Wait 1.2s for 1s animation + buffer
 
       // Force all elements to be fully visible before screenshot
       const allElements = document.querySelectorAll("*");
       const originalStyles = new Map();
+
+      // Temporarily remove any opacity/transform animations
       allElements.forEach((el) => {
         const computedStyle = window.getComputedStyle(el);
         if (
@@ -58,11 +52,6 @@ function FinalBar({ score }) {
         el.style.transform = styles.transform;
         el.style.animation = styles.animation;
       });
-
-      // Restore SVG width
-      if (scoreLight) {
-        scoreLight.style.width = originalWidth || '';
-      }
 
       // Convert to blob
       const blob = await new Promise((resolve) => {
@@ -138,7 +127,7 @@ function FinalBar({ score }) {
         await navigator.clipboard.writeText(`${message} ${url}`);
         alert("התמונה הורדה והטקסט הועתק ללוח! אפשר לשתף את התמונה עם הטקסט");
         return;
-      } catch (_) { }
+      } catch (_) {}
     }
 
     // Fallbacks
@@ -146,7 +135,7 @@ function FinalBar({ score }) {
       await navigator.clipboard.writeText(`${message} ${url}`);
       alert("הטקסט והקישור הועתקו ללוח! אפשר להדביק ולשתף");
       return;
-    } catch (_) { }
+    } catch (_) {}
 
     // If we have an image, download it before opening WhatsApp
     if (file) {
@@ -163,12 +152,12 @@ function FinalBar({ score }) {
         // Copy text to clipboard for WhatsApp
         try {
           await navigator.clipboard.writeText(`${message} ${url}`);
-        } catch (_) { }
+        } catch (_) {}
 
         alert(
           "התמונה הורדה והטקסט הועתק ללוח! פתח את WhatsApp ושתף את התמונה עם הטקסט"
         );
-      } catch (_) { }
+      } catch (_) {}
     }
 
     window.open(
