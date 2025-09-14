@@ -3,110 +3,105 @@ import homeIcon from "../assets/home.svg";
 import shareIcon from "../assets/share.svg";
 import mockData from "../mockData.json";
 import { useAppData } from "../realData";
-import html2canvas from "html2canvas";
+import greenLightIcon from "../assets/green-light.svg";
+import yellowLightIcon from "../assets/yellow-light.svg";
+import redLightIcon from "../assets/red-light.svg";
+
 
 function FinalBar({ score }) {
   const { data } = useAppData(mockData);
+  const active = data ?? mockData;
+  const greatText = active.greatText;
+  const okText = active.okText;
+  const badText = active.badText;
 
-  const generateWebpageScreenshot = async () => {
+  const getLightText = () => {
+    if (score >= 85) {
+      return greatText;
+    } else if (score >= 75) {
+      return okText;
+    } else {
+      return badText;
+    }
+  };
+
+  const generateShareableImage = async () => {
     try {
-      // Wait for any CSS animations to complete (especially FinalScore fade-in)
-      await new Promise((resolve) => setTimeout(resolve, 1200)); // Wait 1.2s for 1s animation + buffer
+      // Get the correct traffic light SVG based on score
+      let lightSvgUrl;
+      if (score >= 85) lightSvgUrl = greenLightIcon;
+      else if (score >= 75) lightSvgUrl = yellowLightIcon;
+      else lightSvgUrl = redLightIcon;
 
-      // Force all elements to be fully visible before screenshot
-      const allElements = document.querySelectorAll("*");
-      const originalStyles = new Map();
+      // Fetch the SVG content
+      const svgResponse = await fetch(lightSvgUrl);
+      const svgText = await svgResponse.text();
+      const svgDataUri = `data:image/svg+xml;base64,${btoa(svgText)}`;
 
-      // Temporarily remove any opacity/transform animations
-      allElements.forEach((el) => {
-        const computedStyle = window.getComputedStyle(el);
-        if (
-          computedStyle.opacity !== "1" ||
-          computedStyle.transform !== "none"
-        ) {
-          originalStyles.set(el, {
-            opacity: el.style.opacity,
-            transform: el.style.transform,
-            animation: el.style.animation,
-          });
-          el.style.opacity = "1";
-          el.style.transform = "none";
-          el.style.animation = "none";
-        }
-      });
+      // Create the combined SVG
+      const width = 600;
+      const height = 800;
+      const svg = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
+      <rect width="100%" height="100%" fill="#384d22" rx="40"/>
+      <image 
+        href="${svgDataUri}" 
+        x="${width / 2 - 220 / 2}" 
+        y="80" 
+        width="${220}" 
+        preserveAspectRatio="xMidYMid meet"
+      />
 
-      // Capture the entire page
-      const canvas = await html2canvas(document.body, {
-        allowTaint: true,
-        useCORS: true,
-        scale: window.devicePixelRatio, // <--- THE KEY CHANGE
-        backgroundColor: "#73944f",
-        logging: false,
-        // It's often better to let html2canvas calculate width/height
-        // unless you have a specific reason to override it.
-        // Try removing these two lines:
-        // width: document.body.scrollWidth,
-        // height: document.body.scrollHeight,
-      });
+      <text x="50%" y="60%" text-anchor="middle" font-size="36" font-family="Rubik,Arial,sans-serif" fill="#fff" direction="rtl">${mockData.textBeforeGrade}</text>
+      <text x="50%" y="75%" text-anchor="middle" font-size="80" font-family="Rubik,Arial,sans-serif" fill="#fff" direction="rtl" font-weight="bold">${score}</text>
+      <text x="50%" y="90%" text-anchor="middle" font-size="36" font-family="Rubik,Arial,sans-serif" fill="#fff" direction="rtl">${getLightText()}</text>
+    </svg>
+  `;
 
-      // Restore original styles
-      originalStyles.forEach((styles, el) => {
-        el.style.opacity = styles.opacity;
-        el.style.transform = styles.transform;
-        el.style.animation = styles.animation;
-      });
-
-      // Convert to blob
+      // Convert SVG to PNG using canvas
       const blob = await new Promise((resolve) => {
-        canvas.toBlob(resolve, "image/png", 0.9);
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0);
+          canvas.toBlob(resolve, 'image/png', 0.95);
+        };
+        img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
       });
 
-      if (blob) {
-        return new File([blob], "חוסן-ארגוני-צילום-מסך.png", {
-          type: "image/png",
-        });
-      }
-      return null;
+      return new File([blob], 'חוסן-ארגוני.png', { type: 'image/png' });
     } catch (error) {
-      console.error("Error taking screenshot:", error);
+      console.error('Error creating shareable image:', error);
       return null;
     }
   };
 
   const handleShare = async () => {
-    const title = document.title || "מדור חוסן ארגוני";
+    const file = await generateShareableImage();
     const url = window.location.href;
     const message = mockData.shareText;
 
-    // Generate the webpage screenshot
-    const file = await generateWebpageScreenshot();
-
-    // Try native share with image first (most important)
-    if (
-      navigator.share &&
-      file &&
-      navigator.canShare &&
-      navigator.canShare({ files: [file] })
-    ) {
+    // Try native share API first
+    if (navigator.share && file && navigator.canShare?.({ files: [file] })) {
       try {
-        await navigator.share({ title, text: message, url, files: [file] });
+        await navigator.share({
+          files: [file],
+          text: message,
+          url
+        });
         return;
       } catch (e) {
-        if (e && e.name === "AbortError") return;
-        // If image sharing fails, try without image
-        try {
-          await navigator.share({ title, text: message, url });
-          return;
-        } catch (e2) {
-          if (e2 && e2.name === "AbortError") return;
-        }
+        if (e.name === "AbortError") return;
       }
     }
 
     // Try native share without image
     if (navigator.share) {
       try {
-        await navigator.share({ title, text: message, url });
+        await navigator.share({ text: message, url });
         return;
       } catch (e) {
         if (e && e.name === "AbortError") return;
@@ -195,5 +190,4 @@ function FinalBar({ score }) {
     </div>
   );
 }
-
 export default FinalBar;
