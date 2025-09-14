@@ -60,24 +60,23 @@
     align-items: center;
     gap: 1.125rem;
 }
-
-.score-light {
-    width: 11rem;
+.score-light-container {
+  width: 11rem;
+  max-width: 90vw;
+  margin: 0 auto; /* Keep it centered */
 }
-
 .score-light {
-    width: 11rem;
-    max-width: 90vw;
-    height: auto;
-    margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  display: block; /* Removes any bottom space */
 }
 
 @media (max-width: 380px) {
-    .score-light {
-        width: 8rem;
-    }
+  .score-light-container {
+    width: 8rem;
+  }
 
-    .final-score {
-        gap: 1.5rem;
-    }
+  .final-score {
+    gap: 1.5rem;
+  }
 }

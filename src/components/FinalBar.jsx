@@ -39,11 +39,14 @@ function FinalBar({ score }) {
       const canvas = await html2canvas(document.body, {
         allowTaint: true,
         useCORS: true,
-        scale: window.devicePixelRatio || 1, // <--- THE MAIN FIX
+        scale: window.devicePixelRatio, // <--- THE KEY CHANGE
         backgroundColor: "#73944f",
         logging: false,
-        width: document.body.scrollWidth,
-        height: document.body.scrollHeight,
+        // It's often better to let html2canvas calculate width/height
+        // unless you have a specific reason to override it.
+        // Try removing these two lines:
+        // width: document.body.scrollWidth,
+        // height: document.body.scrollHeight,
       });
 
       // Restore original styles
