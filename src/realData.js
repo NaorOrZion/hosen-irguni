@@ -157,6 +157,8 @@ export async function fetchAppData(urls = SHEET_URLS) {
     backHomeText: general["backHomeText"] ?? "",
     textBeforeGrade: general["textBeforeGrade"] ?? "",
     phoneNumber: general["phoneNumber"] ?? "",
+    whatsappButtonText: general["whatsappButtonText"] ?? "",
+    whatsappText: general["whatsappText"] ?? "",
     questions,
     CarouselData: carousel,
   };

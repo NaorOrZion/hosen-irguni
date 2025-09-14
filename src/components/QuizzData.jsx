@@ -2,7 +2,7 @@ import ProgressBar from "../components/ProgressBar";
 import arrowBack from "../assets/arrow-back.svg";
 import Car from "../assets/Car.svg";
 import AnswerButtons from "../components/AnswerButtons";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function QuizzData({
   currentQuestion,
@@ -19,6 +19,12 @@ function QuizzData({
   const [animationPhase, setAnimationPhase] = useState("in");
   const [queuedScore, setQueuedScore] = useState(null);
   const [currentSelectedScore, setCurrentSelectedScore] = useState(0);
+  const [hasSelected, setHasSelected] = useState(false);
+  
+  useEffect(() => {
+    setAnimationPhase("in");
+    setHasSelected(false);
+  }, [currentQuestion]);
 
   const handleNext = (selectedScore) => {
     setQueuedScore(selectedScore);
@@ -82,6 +88,7 @@ function QuizzData({
             onNext={handleNext}
             onAnimationEnd={handleAnswersAnimationEnd}
             setCurrentSelectedScore={setCurrentSelectedScore}
+            setHasSelected={setHasSelected}
             />
         )}
         </div>
@@ -96,6 +103,8 @@ function QuizzData({
               handleNext(parseInt(currentSelectedScore));
             }
           }}
+          disabled={isCarSeen && hasSelected === false}
+          style={{ opacity: isCarSeen && hasSelected === false ? 0.5 : 1, cursor: isCarSeen && hasSelected === false ? 'not-allowed' : 'pointer' }}
           >
           {!isCarSeen ? mockData.buttonTextStart : mockData.buttonTextNext}
       </button>

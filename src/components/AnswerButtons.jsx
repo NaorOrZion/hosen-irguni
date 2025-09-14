@@ -1,5 +1,5 @@
 import { useState } from "react";
-function AnswerButtons({ options, buttonTextNext, extraClass = "", onNext, onAnimationEnd, setCurrentSelectedScore }) {
+function AnswerButtons({ options, buttonTextNext, extraClass = "", onNext, onAnimationEnd, setCurrentSelectedScore, setHasSelected }) {
   const [selectedIndex, setSelectedIndex] = useState(-1);
   return (
     <>
@@ -19,14 +19,15 @@ function AnswerButtons({ options, buttonTextNext, extraClass = "", onNext, onAni
             onClick={() => {
               setCurrentSelectedScore(option.score);
               setSelectedIndex(index);
+              setHasSelected(true);
             }}
           >
             {option.question}
           </button>
         ))}
       </div>
-       
-        {/* <button
+
+      {/* <button
           className="button-hosen"
           style={{ marginBottom: "3rem" }}
           onClick={() => {
@@ -37,7 +38,7 @@ function AnswerButtons({ options, buttonTextNext, extraClass = "", onNext, onAni
         >
           {buttonTextNext}
         </button> */}
-  
+
     </>
   );
 }
