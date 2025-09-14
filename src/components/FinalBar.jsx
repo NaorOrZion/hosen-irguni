@@ -36,7 +36,9 @@ function FinalBar({ score }) {
       // Fetch the SVG content
       const svgResponse = await fetch(lightSvgUrl);
       const svgText = await svgResponse.text();
-      const svgDataUri = `data:image/svg+xml;base64,${btoa(svgText)}`;
+      const svgDataUri =
+        "data:image/svg+xml;base64," +
+        btoa(unescape(encodeURIComponent(svgText)));
 
       // Create the combined SVG
       const width = 600;
@@ -45,12 +47,12 @@ function FinalBar({ score }) {
     <svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
       <rect width="100%" height="100%" fill="#384d22" rx="40"/>
       <image 
-        href="${svgDataUri}" 
-        x="${width / 2 - 220 / 2}" 
-        y="80" 
-        width="${220}" 
-        preserveAspectRatio="xMidYMid meet"
-      />
+  xlink:href="${svgDataUri}" 
+  x="${width / 2 - 220 / 2}" 
+  y="80" 
+  width="220" 
+  preserveAspectRatio="xMidYMid meet"
+/>
 
       <text x="50%" y="60%" text-anchor="middle" font-size="36" font-family="Rubik,Arial,sans-serif" fill="#fff" direction="rtl">${mockData.textBeforeGrade}</text>
       <text x="50%" y="75%" text-anchor="middle" font-size="80" font-family="Rubik,Arial,sans-serif" fill="#fff" direction="rtl" font-weight="bold">${score}</text>
