@@ -67,9 +67,7 @@
 
 .score-light {
     width: 140px;
-    height: 180px;
-    object-fit: contain;
-    display: block;
+    height: auto;
     margin: 0 auto;
 }
 
