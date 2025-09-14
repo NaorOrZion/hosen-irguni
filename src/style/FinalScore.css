@@ -66,8 +66,8 @@
 }
 
 .score-light {
-    width: 11rem;
-    max-width: 40vw;
+    width: 180px;
+    height: auto;
     object-fit: contain;
     display: block;
     margin: 0 auto;
