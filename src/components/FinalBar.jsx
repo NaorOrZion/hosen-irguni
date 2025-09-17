@@ -74,7 +74,7 @@ function FinalBar({ score }) {
 
   const handleShare = async () => {
     const file = await generateShareableImage();
-    const url = window.location.href;
+    const url = "https://hosen-irguni.vercel.app";
     const message = mockData.shareText;
 
     // Try native share API first
