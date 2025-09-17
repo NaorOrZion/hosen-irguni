@@ -131,7 +131,7 @@
   justify-content: center;
   align-items: center;
   gap: 5vh;
-  z-index: -3;
+  z-index: -3;;
   padding-top: 2vh;
 }
 
@@ -142,7 +142,7 @@
   align-items: center;
   flex-direction: column;
   gap: 10px;
-  padding-top:12vh;
+  padding-top: 13vh
 }
 .answers-scroll {
   width: 100%;

@@ -72,15 +72,6 @@
   width: clamp(14.234rem, 12vw + 1rem, 31.313rem);
 }
 
-.answers {
-  display: flex;
-  flex-grow: 1;
-  justify-content: center;
-  align-items: center;
-  z-index: -10;
-  overflow-y: auto;
-}
-
 .answer-buttons {
   display: flex;
   flex-direction: column;
