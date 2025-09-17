@@ -7,7 +7,6 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 export const Quizz2 = ({ score, setScore, totalScore, setTotalScore }) => {
-
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [isCarSeen, setIsCarSeen] = useState(false);
     const { data, loading, error } = useAppData(mockData);
