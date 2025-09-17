@@ -6,9 +6,8 @@ import { useAppData } from "../realData";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-export const Quizz2 = () => {
-    const [score, setScore] = useState([]);
-    const [totalScore, setTotalScore] = useState(0);
+export const Quizz2 = ({ score, setScore, totalScore, setTotalScore }) => {
+
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [isCarSeen, setIsCarSeen] = useState(false);
     const { data, loading, error } = useAppData(mockData);
@@ -20,6 +19,7 @@ export const Quizz2 = () => {
     useEffect(() => {
         if (isDone) {
             setTotalScore(score.reduce((accumulator, currentValue) => accumulator + currentValue, 0));
+            navigate("/final");
         }
     }, [isDone, score]);
 
@@ -38,7 +38,7 @@ export const Quizz2 = () => {
     return (
         <div className="quizz-page">
             <div className={`small-circle ${isDone ? 'move-left' : ''}`}></div>
-            
+
             {isDone ? (
                 <FinalContent score={totalScore} />
             ) : (
