@@ -86,7 +86,7 @@ function FinalBar({ score }) {
 
       <!-- embedded share text so apps that drop shared text still show it in the image -->
       <text x="50%" y="70%" text-anchor="middle" font-size="20" font-family="Rubik,Arial,sans-serif" fill="#fff" direction="rtl">
-        ${tspans}
+        ${shareText}
       </text>
 
     </svg>
