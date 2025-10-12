@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import hosenLogo from "../assets/LOGO.svg";
+import akaLogo from "../assets/Logo-aka.png";
+import mmdaLogo from "../assets/mmda.png";
 import "../style/Home.css";
 import mockData from "../mockData.json";
 import Skeleton from "@mui/material/Skeleton";
@@ -12,6 +14,10 @@ function Home() {
 
   return (
     <div className="home-page">
+      <div className="side-logos">
+        <img src={akaLogo} className="side-logo" alt="Hosen irguni logo" width="32px"/>
+        <img src={mmdaLogo} className="side-logo" alt="Hosen irguni logo" width="41px"/>
+      </div>
       <div className="upper-container">
         <img src={hosenLogo} className="logo" alt="Hosen irguni logo" />
         <div className="headline-container">
