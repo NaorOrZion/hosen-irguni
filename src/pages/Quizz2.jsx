@@ -53,6 +53,7 @@ export const Quizz2 = ({ score, setScore, totalScore, setTotalScore }) => {
                         score,
                         handleBack,
                         isDone,
+                        loading
                     }}
                 />
             )}
