@@ -32,9 +32,14 @@ function FinalBar({ score, shareableContentRef }) { // Accept the shareableConte
         return null;
       }
 
-      const canvas = await html2canvas(shareableContentRef.current, { // Use the ref's current element as the target
+      const canvas = await html2canvas(shareableContentRef.current, {
+        // Use the ref's current element as the target
+        backgroundColor: "#F0F0F0", // Set a background color to prevent transparency issues
         useCORS: true,
         scale: 2, // Higher scale for better quality
+        scrollX: -window.scrollX,
+        scrollY: -window.scrollY,
+        windowWidth: document.documentElement.offsetWidth,
       });
       const blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/png', 0.9));
       return new File([blob], 'hosen-irguni-screenshot.png', { type: 'image/png' });
