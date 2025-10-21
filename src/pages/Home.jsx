@@ -14,9 +14,11 @@ function Home() {
 
   return (
     <div className="home-page">
-      <div className="side-logos">
-        <img src={akaLogo} className="side-logo" alt="Hosen irguni logo" width="32px"/>
-        <img src={mmdaLogo} className="side-logo" alt="Hosen irguni logo" width="41px"/>
+      <div className="side-logos-right">
+        <img src={mmdaLogo} className="side-logo" alt="Hosen irguni logo" width="51px"/>
+      </div>
+      <div className="side-logos-left">
+        <img src={akaLogo} className="side-logo" alt="Hosen irguni logo" width="51px"/>
       </div>
       <div className="upper-container">
         <img src={hosenLogo} className="logo" alt="Hosen irguni logo" />
