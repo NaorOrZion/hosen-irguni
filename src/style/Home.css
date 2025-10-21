@@ -86,7 +86,7 @@
 }
 
 .side-logos-right {
-  position: fixed;
+  position: absolute;
   top: 3%;
   right: 5%;
   display: flex;
@@ -96,7 +96,7 @@
   align-items: center;
 }
 .side-logos-left {
-  position: fixed;
+  position: absolute;
   top: 4%;
   left: 5%;
   display: flex;

@@ -130,7 +130,7 @@ function Carousel() {
           </div>
 
           <div className="card-illustration">
-            <img src={illustrationMap[currentCard.id]} alt="tank" />
+            <img src={illustrationMap[currentCard.id]} alt="illustration" width={"120px"}/>
           </div>
         </div>
       </div>
