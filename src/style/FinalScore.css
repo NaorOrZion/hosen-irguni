@@ -7,10 +7,10 @@
     margin-top: 10%;
     gap: 2.875rem;
 
-    opacity: 0;
-    transform: translateY(-50px);
+    /* opacity: 0;
+    transform: translateY(-50px); */
     /* start above */
-    animation: fadeInDown 1s ease forwards;
+    /* animation: fadeInDown 1s ease forwards; */
     /* play once */
 }
 
@@ -25,10 +25,10 @@
     min-height: 350px;
     overflow: visible;
 
-    opacity: 0;
-    transform: translateY(-50px);
+    /* opacity: 0;
+    transform: translateY(-50px); */
     /* start above */
-    animation: fadeInDown 1s ease forwards;
+    /* animation: fadeInDown 1s ease forwards; */
     /* play once */
 }
 
