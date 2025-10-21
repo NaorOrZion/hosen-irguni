@@ -7,6 +7,10 @@ import MiniCarIcon from "../assets/mini-car-icon.svg";
 import WheelIcon from "../assets/wheel-icon.svg";
 import RoadIcon from "../assets/road-icon.svg";
 import DriverIcon from "../assets/driver-icon.svg";
+import Soldiers from "../assets/5-soldiers.svg";
+import Commander from "../assets/a-commander-with-a-helmet-on-his-head-and-behind.svg";
+import Crate from "../assets/a-military-crate-containing-ammunition-for-a-weapo.svg";
+import Tanks from "../assets/a-tank.svg";
 
 function Carousel() {
   const { data } = useAppData(mockData);
@@ -25,6 +29,13 @@ function Carousel() {
     2: WheelIcon,
     3: RoadIcon,
     4: DriverIcon,
+  };
+
+  const illustrationMap = {
+    1: Tanks,
+    2: Crate,
+    3: Soldiers,
+    4: Commander,
   };
 
   const nextCard = () => {
@@ -119,7 +130,7 @@ function Carousel() {
           </div>
 
           <div className="card-illustration">
-            <img src={Tank} alt="tank" />
+            <img src={illustrationMap[currentCard.id]} alt="tank" />
           </div>
         </div>
       </div>
