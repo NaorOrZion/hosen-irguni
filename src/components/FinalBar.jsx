@@ -7,7 +7,6 @@ import greenLightIcon from "../assets/green-light.svg";
 import yellowLightIcon from "../assets/yellow-light.svg";
 import redLightIcon from "../assets/red-light.svg";
 
-
 function FinalBar({ score }) {
   const { data } = useAppData(mockData);
   const active = data ?? mockData;
@@ -15,50 +14,55 @@ function FinalBar({ score }) {
   const okText = active.okText;
   const badText = active.badText;
 
+  // Assuming you have a variable for the bottom Call to Action text
+  const bottomCtaText = active.footerCtaText || "בואו ובדקו את החוסן בארגון שלכם בעזרת מבחן קצר >>";
+
   const getLightText = () => {
-    if (score >= 85) {
-      return greatText;
-    } else if (score >= 75) {
-      return okText;
-    } else {
-      return badText;
-    }
+    if (score >= 85) return greatText;
+    else if (score >= 75) return okText;
+    else return badText;
   };
 
   const generateShareableImage = async () => {
     try {
-      // Get the correct traffic light SVG based on score
+      // 1. Determine which icon and color to use
       let lightSvgUrl;
-      if (score >= 85) lightSvgUrl = greenLightIcon;
-      else if (score >= 75) lightSvgUrl = yellowLightIcon;
-      else lightSvgUrl = redLightIcon;
+      let scoreColor; 
 
-      // Fetch the SVG content
+      if (score >= 85) {
+        lightSvgUrl = greenLightIcon;
+        scoreColor = "#4ade80"; // Green
+      } else if (score >= 75) {
+        lightSvgUrl = yellowLightIcon;
+        scoreColor = "#facc15"; // Yellow
+      } else {
+        lightSvgUrl = redLightIcon;
+        scoreColor = "#f87171"; // Red
+      }
+
+      // 2. Fetch the Icon
       const svgResponse = await fetch(lightSvgUrl);
       const svgText = await svgResponse.text();
-      const svgDataUri = `data:image/svg+xml;base64,${btoa(svgText)}`;
+      // Ensure correct base64 encoding for external SVGs
+      const svgBase64 = btoa(unescape(encodeURIComponent(svgText))); 
+      const svgDataUri = `data:image/svg+xml;base64,${svgBase64}`;
 
-      // Create the combined SVG
+      // 3. Setup Canvas Dimensions
       const width = 600;
-      const height = 800;
-
-      // Prefer live share text if provided, otherwise fallback to mock data
-      const shareText = (active && active.shareText) || mockData.shareText || '';
-
-      // Simple XML escape for embedding text into the SVG
+      const height = 900; 
+      
       const escapeXml = (str) =>
         String(str)
-          .replace(/&/g, '&amp;')
-          .replace(/</g, '&lt;')
-          .replace(/>/g, '&gt;')
-          .replace(/"/g, '&quot;')
-          .replace(/'/g, '&#39;');
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#39;");
 
-      // Wrap text into approximate-length lines so we can render using <tspan>
       const wrapText = (text, maxChars) => {
         const words = text.split(/\s+/);
         const lines = [];
-        let line = '';
+        let line = "";
         for (const w of words) {
           if (!line) line = w;
           else if ((line + ' ' + w).length <= maxChars) line = line + ' ' + w;
@@ -71,28 +75,50 @@ function FinalBar({ score }) {
         return lines;
       };
 
-      const shareLines = wrapText(shareText, 26).slice(0, 6); // limit lines to avoid overflow
-      const tspans = shareLines
-        .map((ln, i) => `<tspan x="50%" dy="${i === 0 ? '0' : '1.25em'}">${escapeXml(ln)}</tspan>`)
-        .join('');
+      // Prepare Bottom CTA Text (Wrapped)
+      const ctaLines = wrapText(bottomCtaText, 25); 
+      const ctaTspans = ctaLines
+        .map((ln, i) => `<tspan x="300" dy="${i === 0 ? "0" : "1.3em"}">${escapeXml(ln)}</tspan>`)
+        .join("");
 
+      // 5. Build the SVG Template to match the photo
       const svg = `
-    <svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
-      <rect width="100%" height="100%" fill="#384d22" rx="40"/>
+        <svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
+          <defs>
+            <linearGradient id="bgGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style="stop-color:#6C8E4E;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#3A5228;stop-opacity:1" />
+            </linearGradient>
+            
+            <filter id="textShadow">
+              <feDropShadow dx="1" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.3"/>
+            </filter>
+          </defs>
 
-      <text x="50%" y="18%" text-anchor="middle" font-size="28" font-family="Rubik,Arial,sans-serif" fill="#fff" direction="rtl">${escapeXml(mockData.textBeforeGrade)}</text>
-      <text x="50%" y="40%" text-anchor="middle" font-size="84" font-family="Rubik,Arial,sans-serif" fill="#fff" direction="rtl" font-weight="bold">${score}</text>
-      <text x="50%" y="56%" text-anchor="middle" font-size="30" font-family="Rubik,Arial,sans-serif" fill="#fff" direction="rtl">${escapeXml(getLightText())}</text>
+          <rect width="100%" height="100%" fill="url(#bgGradient)" />
+          
+          <image href="${svgDataUri}" x="200" y="50" width="200" height="200" />
 
-      <!-- embedded share text so apps that drop shared text still show it in the image -->
-      <text x="50%" y="70%" text-anchor="middle" font-size="20" font-family="Rubik,Arial,sans-serif" fill="#fff" direction="rtl">
-        ${shareText}
-      </text>
+          <text x="300" y="300" text-anchor="middle" font-size="36" font-family="Rubik, sans-serif" fill="#e2e8f0" direction="rtl" font-weight="500" style="filter:url(#textShadow);">
+            ${escapeXml(mockData.textBeforeGrade || "ניקוד סופי:")}
+          </text>
 
-    </svg>
-  `;
+          <text x="300" y="440" text-anchor="middle" font-size="130" font-family="Rubik, sans-serif" fill="${scoreColor}" font-weight="900" style="filter:url(#textShadow);">
+            ${score}
+          </text>
 
-      // Convert SVG to PNG using canvas
+          <text x="300" y="520" text-anchor="middle" font-size="32" font-family="Rubik, sans-serif" fill="#ffffff" font-weight="400" direction="rtl">
+            ${escapeXml(getLightText())}
+          </text>
+
+          <text x="300" y="750" text-anchor="middle" font-size="38" font-family="Rubik, sans-serif" fill="#ffffff" font-weight="700" direction="rtl" style="filter:url(#textShadow);">
+            ${ctaTspans}
+          </text>
+
+        </svg>
+      `;
+
+      // 6. Convert SVG to PNG
       const blob = await new Promise((resolve) => {
         const img = new Image();
         img.onload = () => {
@@ -101,7 +127,7 @@ function FinalBar({ score }) {
           canvas.height = height;
           const ctx = canvas.getContext('2d');
           ctx.drawImage(img, 0, 0);
-          canvas.toBlob(resolve, 'image/png', 0.95);
+          canvas.toBlob(resolve, 'image/png', 1.0);
         };
         img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
       });
@@ -132,6 +158,7 @@ function FinalBar({ score }) {
       try {
         await navigator.share({
           files: [file],
+          title: "חוסן ארגוני",
           text: message,
           url
         });
@@ -164,47 +191,27 @@ function FinalBar({ score }) {
         document.body.removeChild(link);
         URL.revokeObjectURL(downloadUrl);
 
-        // Also copy text to clipboard
-        await navigator.clipboard.writeText(`${message} ${url}`);
-        alert("התמונה הורדה והטקסט הועתק ללוח! אפשר לשתף את התמונה עם הטקסט");
+        alert("התמונה הורדה והטקסט הועתק ללוח! ניתן לשתף בוואטסאפ.");
+        
+        // Also try to open WhatsApp with the text message
+        window.open(
+          `https://wa.me/?text=${encodeURIComponent(`${message} ${url}`)}`,
+          "_blank"
+        );
         return;
       } catch (_) { }
     }
 
-    // Fallbacks
+    // Final Fallback (Clipboard + WhatsApp)
     try {
       await navigator.clipboard.writeText(`${message} ${url}`);
       alert("הטקסט והקישור הועתקו ללוח! אפשר להדביק ולשתף");
+      window.open(
+        `https://wa.me/?text=${encodeURIComponent(`${message} ${url}`)}`,
+        "_blank"
+      );
       return;
     } catch (_) { }
-
-    // If we have an image, download it before opening WhatsApp
-    if (file) {
-      try {
-        const downloadUrl = URL.createObjectURL(file);
-        const link = document.createElement("a");
-        link.href = downloadUrl;
-        link.download = "חוסן-ארגוני-ציון.png";
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        URL.revokeObjectURL(downloadUrl);
-
-        // Copy text to clipboard for WhatsApp
-        try {
-          await navigator.clipboard.writeText(`${message} ${url}`);
-        } catch (_) { }
-
-        alert(
-          "התמונה הורדה והטקסט הועתק ללוח! פתח את WhatsApp ושתף את התמונה עם הטקסט"
-        );
-      } catch (_) { }
-    }
-
-    window.open(
-      `https://wa.me/?text=${encodeURIComponent(`${message} ${url}`)}`,
-      "_blank"
-    );
   };
 
   return (
