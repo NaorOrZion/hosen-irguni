@@ -97,17 +97,17 @@ function FinalBar({ score }) {
 
           <rect width="100%" height="100%" fill="url(#bgGradient)" />
           
-          <image href="${svgDataUri}" x="200" y="50" width="200" height="200" />
+          <image href="${svgDataUri}" x="200" y="100" width="200" height="200" />
 
-          <text x="300" y="350" text-anchor="middle" font-size="36" font-family="Rubik, sans-serif" fill="#e2e8f0" direction="rtl" font-weight="500" style="filter:url(#textShadow);">
+          <text x="300" y="450" text-anchor="middle" font-size="36" font-family="Rubik, sans-serif" fill="#e2e8f0" direction="rtl" font-weight="500" style="filter:url(#textShadow);">
             ${escapeXml(mockData.textBeforeGrade || "ניקוד סופי:")}
           </text>
 
-          <text x="300" y="490" text-anchor="middle" font-size="130" font-family="Rubik, sans-serif" fill="${scoreColor}" font-weight="900" style="filter:url(#textShadow);">
+          <text x="300" y="590" text-anchor="middle" font-size="130" font-family="Rubik, sans-serif" fill="${scoreColor}" font-weight="900" style="filter:url(#textShadow);">
             ${score}
           </text>
 
-          <text x="300" y="570" text-anchor="middle" font-size="24" font-family="Rubik, sans-serif" fill="#ffffff" font-weight="400" direction="rtl">
+          <text x="300" y="670" text-anchor="middle" font-size="24" font-family="Rubik, sans-serif" fill="#ffffff" font-weight="400" direction="rtl">
             ${escapeXml(getLightText())}
           </text>
 
