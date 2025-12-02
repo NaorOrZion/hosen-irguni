@@ -86,7 +86,7 @@ function FinalBar({ score }) {
         <svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
           <defs>
             <linearGradient id="bgGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" style="stop-color:#6C8E4E;stop-opacity:1" />
+              <stop offset="0%" style="stop-color:#73944F;stop-opacity:1" />
               <stop offset="100%" style="stop-color:#506B33;stop-opacity:1" />
             </linearGradient>
             
