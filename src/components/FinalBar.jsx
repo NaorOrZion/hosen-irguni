@@ -111,7 +111,7 @@ function FinalBar({ score }) {
             ${escapeXml(getLightText())}
           </text>
 
-          <text x="300" y="750" text-anchor="middle" font-size="38" font-family="Rubik, sans-serif" fill="#ffffff" font-weight="700" direction="rtl" style="filter:url(#textShadow);">
+          <text x="50%" y="750" text-anchor="middle" font-size="38" font-family="Rubik, sans-serif" fill="#ffffff" font-weight="700" direction="rtl" style="filter:url(#textShadow);">
             ${ctaTspans}
           </text>
 
