@@ -87,7 +87,7 @@ function FinalBar({ score }) {
           <defs>
             <linearGradient id="bgGradient" x1="0%" y1="0%" x2="0%" y2="100%">
               <stop offset="0%" style="stop-color:#6C8E4E;stop-opacity:1" />
-              <stop offset="100%" style="stop-color:#3A5228;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#506B33;stop-opacity:1" />
             </linearGradient>
             
             <filter id="textShadow">
@@ -97,7 +97,7 @@ function FinalBar({ score }) {
 
           <rect width="100%" height="100%" fill="url(#bgGradient)" />
           
-          <image href="${svgDataUri}" x="200" y="100" width="200" height="200" />
+          <image href="${svgDataUri}" x="200" y="50" width="200" height="200" />
 
           <text x="300" y="350" text-anchor="middle" font-size="36" font-family="Rubik, sans-serif" fill="#e2e8f0" direction="rtl" font-weight="500" style="filter:url(#textShadow);">
             ${escapeXml(mockData.textBeforeGrade || "ניקוד סופי:")}
@@ -107,7 +107,7 @@ function FinalBar({ score }) {
             ${score}
           </text>
 
-          <text x="300" y="570" text-anchor="middle" font-size="32" font-family="Rubik, sans-serif" fill="#ffffff" font-weight="400" direction="rtl">
+          <text x="300" y="570" text-anchor="middle" font-size="24" font-family="Rubik, sans-serif" fill="#ffffff" font-weight="400" direction="rtl">
             ${escapeXml(getLightText())}
           </text>
 
