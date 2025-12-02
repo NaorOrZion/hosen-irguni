@@ -31,13 +31,13 @@ function FinalBar({ score }) {
 
       if (score >= 85) {
         lightSvgUrl = greenLightIcon;
-        scoreColor = "#4ade80"; // Green
+        scoreColor = "#28C624"; // Green
       } else if (score >= 75) {
         lightSvgUrl = yellowLightIcon;
-        scoreColor = "#facc15"; // Yellow
+        scoreColor = "#FFD81A"; // Yellow
       } else {
         lightSvgUrl = redLightIcon;
-        scoreColor = "#f87171"; // Red
+        scoreColor = "#E81818"; // Red
       }
 
       // 2. Fetch the Icon
