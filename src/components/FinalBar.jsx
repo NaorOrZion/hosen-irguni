@@ -103,7 +103,7 @@ function FinalBar({ score }) {
             ${escapeXml(mockData.textBeforeGrade || "ניקוד סופי:")}
           </text>
 
-          <text x="50%" y="50%" text-anchor="middle" font-size="150" font-family="Rubik, sans-serif" fill="${scoreColor}" font-weight="900" style="filter:url(#textShadow);" direction="rtl">
+          <text x="50%" y="55%" text-anchor="middle" font-size="150" font-family="Rubik, sans-serif" fill="${scoreColor}" font-weight="900" style="filter:url(#textShadow);" direction="rtl">
             ${score}
           </text>
 
