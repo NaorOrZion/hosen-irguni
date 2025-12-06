@@ -6,6 +6,7 @@ import { useAppData } from "../realData";
 import greenLightIcon from "../assets/green-light.svg";
 import yellowLightIcon from "../assets/yellow-light.svg";
 import redLightIcon from "../assets/red-light.svg";
+import LOGO from "../assets/LOGO.svg";
 
 function FinalBar({ score }) {
   const { data } = useAppData(mockData);
@@ -96,10 +97,10 @@ function FinalBar({ score }) {
           </defs>
 
           <rect width="100%" height="100%" fill="url(#bgGradient)" />
-          
-          <circle r="30%" cx="50%" cy="50%" fill="white" style="filter:url(#textShadow);"/>
 
-          <text x="50%" y="20%" text-anchor="middle" font-size="64" font-family="Rubik, sans-serif" fill="white" direction="rtl" font-weight="500" style="filter:url(#textShadow);">
+          <circle r="25%" cx="50%" cy="50%" fill="white" style="filter:url(#textShadow);"/>
+
+          <text x="50%" y="25%" text-anchor="middle" font-size="64" font-family="Rubik, sans-serif" fill="white" direction="rtl" font-weight="500" style="filter:url(#textShadow);">
             ${escapeXml(mockData.textBeforeGrade || "ניקוד סופי:")}
           </text>
 
@@ -107,7 +108,7 @@ function FinalBar({ score }) {
             ${score}
           </text>
 
-          <text x="50%" y="85%" text-anchor="middle" font-size="32" font-family="Rubik, sans-serif" fill="white" font-weight="400" style="filter:url(#textShadow); direction: rtl;">
+          <text x="50%" y="80%" text-anchor="middle" font-size="24" font-family="Rubik, sans-serif" fill="white" font-weight="400" style="filter:url(#textShadow); direction: rtl;">
             ${escapeXml(getLightText())}
           </text>
 
