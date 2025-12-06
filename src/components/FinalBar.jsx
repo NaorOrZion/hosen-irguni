@@ -107,7 +107,7 @@ function FinalBar({ score }) {
             ${score}
           </text>
 
-          <text x="50%" y="85%" text-anchor="middle" font-size="32" font-family="Rubik, sans-serif" fill="#151719" font-weight="400" style="filter:url(#textShadow); direction="rtl">
+          <text x="50%" y="85%" text-anchor="middle" font-size="32" font-family="Rubik, sans-serif" fill="#151719" font-weight="400" style="filter:url(#textShadow); direction: rtl;">
             ${escapeXml(getLightText())}
           </text>
 
