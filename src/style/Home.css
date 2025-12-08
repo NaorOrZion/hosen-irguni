@@ -41,6 +41,10 @@
   margin: 0px;
 }
 
+.heading-h2 {
+  margin-top: -25px;
+}
+
 .subheading-p {
   color: #506B33;
   font-size: var(--fs-subheading);

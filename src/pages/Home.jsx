@@ -38,7 +38,7 @@ function Home() {
               (data ?? mockData).mainAppTitle
             )}
           </h1>
-          <h1 className="heading-h1">
+          <h1 className="heading-h1 heading-h2">
             {loading ? (
               <Skeleton
                 variant="rounded"
