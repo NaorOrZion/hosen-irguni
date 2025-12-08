@@ -16,7 +16,8 @@ function FinalBar({ score }) {
   const badText = active.badText;
 
   // Assuming you have a variable for the bottom Call to Action text
-  const bottomCtaText = active.footerCtaText || "בואו ובדקו את החוסן בארגון שלכם בעזרת מבחן קצר >>";
+  const bottomCtaText =
+    active.footerCtaText || "בואו ובדקו את החוסן בארגון שלכם בעזרת מבחן קצר >>";
 
   const getLightText = () => {
     if (score >= 85) return greatText;
@@ -28,7 +29,7 @@ function FinalBar({ score }) {
     try {
       // 1. Determine which icon and color to use
       let lightSvgUrl;
-      let scoreColor; 
+      let scoreColor;
 
       if (score >= 85) {
         lightSvgUrl = greenLightIcon;
@@ -45,13 +46,13 @@ function FinalBar({ score }) {
       const svgResponse = await fetch(lightSvgUrl);
       const svgText = await svgResponse.text();
       // Ensure correct base64 encoding for external SVGs
-      const svgBase64 = btoa(unescape(encodeURIComponent(svgText))); 
+      const svgBase64 = btoa(unescape(encodeURIComponent(svgText)));
       const svgDataUri = `data:image/svg+xml;base64,${svgBase64}`;
 
       // 3. Setup Canvas Dimensions
       const width = 600;
-      const height = 900; 
-      
+      const height = 900;
+
       const escapeXml = (str) =>
         String(str)
           .replace(/&/g, "&amp;")
@@ -66,7 +67,7 @@ function FinalBar({ score }) {
         let line = "";
         for (const w of words) {
           if (!line) line = w;
-          else if ((line + ' ' + w).length <= maxChars) line = line + ' ' + w;
+          else if ((line + " " + w).length <= maxChars) line = line + " " + w;
           else {
             lines.push(line);
             line = w;
@@ -77,9 +78,14 @@ function FinalBar({ score }) {
       };
 
       // Prepare Bottom CTA Text (Wrapped)
-      const ctaLines = wrapText(bottomCtaText, 25); 
+      const ctaLines = wrapText(bottomCtaText, 25);
       const ctaTspans = ctaLines
-        .map((ln, i) => `<tspan x="300" dy="${i === 0 ? "0" : "1.3em"}">${escapeXml(ln)}</tspan>`)
+        .map(
+          (ln, i) =>
+            `<tspan x="300" dy="${i === 0 ? "0" : "1.3em"}">${escapeXml(
+              ln
+            )}</tspan>`
+        )
         .join("");
 
       // 5. Build the SVG Template to match the photo
@@ -167,7 +173,7 @@ function FinalBar({ score }) {
        ${score}
      </text>
 
-     <image x="39%" y="51%"  height="170" href="${lightSvgUrl}"  />
+    <image x="39%" y="51%"  height="170" href="${svgDataUri}"  />
 
      <text x="50%" y="90%" text-anchor="middle" font-size="24" font-family="Rubik, sans-serif" fill="white" font-weight="400" style="filter:url(#textShadow); direction: rtl;">
        ${escapeXml(getLightText())}
@@ -183,19 +189,19 @@ function FinalBar({ score }) {
       const blob = await new Promise((resolve) => {
         const img = new Image();
         img.onload = () => {
-          const canvas = document.createElement('canvas');
+          const canvas = document.createElement("canvas");
           canvas.width = width;
           canvas.height = height;
-          const ctx = canvas.getContext('2d');
+          const ctx = canvas.getContext("2d");
           ctx.drawImage(img, 0, 0);
-          canvas.toBlob(resolve, 'image/png', 1.0);
+          canvas.toBlob(resolve, "image/png", 1.0);
         };
-        img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+        img.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
       });
 
-      return new File([blob], 'חוסן-ארגוני.png', { type: 'image/png' });
+      return new File([blob], "חוסן-ארגוני.png", { type: "image/png" });
     } catch (error) {
-      console.error('Error creating shareable image:', error);
+      console.error("Error creating shareable image:", error);
       return null;
     }
   };
@@ -203,7 +209,7 @@ function FinalBar({ score }) {
   const handleShare = async () => {
     const file = await generateShareableImage();
     const url = "https://hosen-irguni.vercel.app";
-    const message = (active && active.shareText) || mockData.shareText || '';
+    const message = (active && active.shareText) || mockData.shareText || "";
 
     // Copy message+url to clipboard as a fallback for platforms that strip shared text
     try {
@@ -211,7 +217,7 @@ function FinalBar({ score }) {
         await navigator.clipboard.writeText(`${message} ${url}`);
       }
     } catch (err) {
-      console.warn('clipboard write before share failed', err);
+      console.warn("clipboard write before share failed", err);
     }
 
     // Try native share API first
@@ -221,7 +227,7 @@ function FinalBar({ score }) {
           files: [file],
           title: "חוסן ארגוני",
           text: message,
-          url
+          url,
         });
         return;
       } catch (e) {
@@ -253,14 +259,14 @@ function FinalBar({ score }) {
         URL.revokeObjectURL(downloadUrl);
 
         alert("התמונה הורדה והטקסט הועתק ללוח! ניתן לשתף בוואטסאפ.");
-        
+
         // Also try to open WhatsApp with the text message
         window.open(
           `https://wa.me/?text=${encodeURIComponent(`${message} ${url}`)}`,
           "_blank"
         );
         return;
-      } catch (_) { }
+      } catch (_) {}
     }
 
     // Final Fallback (Clipboard + WhatsApp)
@@ -272,7 +278,7 @@ function FinalBar({ score }) {
         "_blank"
       );
       return;
-    } catch (_) { }
+    } catch (_) {}
   };
 
   return (
