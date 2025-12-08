@@ -12,6 +12,8 @@ function Home() {
   const navigate = useNavigate();
   const { data, error, loading } = useAppData(mockData);
 
+  console.log("Home data:", data);
+
   return (
     <div className="home-page">
       <div className="side-logos-right">
@@ -34,6 +36,19 @@ function Home() {
               />
             ) : (
               (data ?? mockData).mainAppTitle
+            )}
+          </h1>
+          <h1 className="heading-h2">
+            {loading ? (
+              <Skeleton
+                variant="rounded"
+                animation="wave"
+                sx={{ marginTop: 1 }}
+                width={270}
+                height={90}
+              />
+            ) : (
+              (data ?? mockData).mainAppTitleSec
             )}
           </h1>
           <p
