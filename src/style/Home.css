@@ -28,6 +28,7 @@
 .headline-container {
   display: flex;
   flex-direction: column;
+  direction: rtl;
   
   gap: 2vh;
   width: 80vw;

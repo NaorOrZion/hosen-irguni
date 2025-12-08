@@ -193,8 +193,11 @@ function FinalBar({ score }) {
           canvas.width = width;
           canvas.height = height;
           const ctx = canvas.getContext("2d");
-          ctx.drawImage(img, 0, 0);
-          canvas.toBlob(resolve, "image/png", 1.0);
+          // Small delay lets nested <image> elements finish painting inside the SVG
+          setTimeout(() => {
+            ctx.drawImage(img, 0, 0);
+            canvas.toBlob(resolve, "image/png", 1.0);
+          }, 1000);
         };
         img.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
       });
