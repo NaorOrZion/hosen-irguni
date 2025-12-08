@@ -13,10 +13,17 @@
   --fs-body: 1rem;
   --fs-button: 1.25rem;
 
+  font-family: 'rubik', sans-serif;
+
   /* font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; */
+}
+
+@font-face {
+  font-family: rubik; /* set name */
+  src: url(src/assets/font/Rubik-VariableFont_wght.ttf); /* url of the font */
 }
 
 a:visited {
