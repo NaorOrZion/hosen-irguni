@@ -38,12 +38,12 @@ function Home() {
               (data ?? mockData).mainAppTitle
             )}
           </h1>
-          <h1 className="heading-h2">
+          <h1 className="heading-h1">
             {loading ? (
               <Skeleton
                 variant="rounded"
                 animation="wave"
-                sx={{ marginTop: 1 }}
+                sx={{ marginTop: 1, }}
                 width={270}
                 height={90}
               />
