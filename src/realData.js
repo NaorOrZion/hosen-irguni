@@ -145,6 +145,7 @@ export async function fetchAppData(urls = SHEET_URLS) {
   const data = {
     mainAppSubheading: general["mainAppSubheading"] ?? "",
     mainAppTitle: general["mainAppTitle"] ?? "",
+    mainAppTitleSec: general["mainAppTitleSec"] ?? "",
     buttonTextHome: general["buttonTextHome"] ?? "",
     FinalPageMiniText: general["FinalPageMiniText"] ?? "",
     carText: general["carText"] ?? "",

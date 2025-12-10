@@ -28,6 +28,7 @@
 .headline-container {
   display: flex;
   flex-direction: column;
+  direction: rtl;
   
   gap: 2vh;
   width: 80vw;
@@ -39,6 +40,10 @@
   color: #384D22;
   font-size: var(--fs-heading);
   margin: 0px;
+}
+
+.heading-h2 {
+  margin-top: -25px;
 }
 
 .subheading-p {
