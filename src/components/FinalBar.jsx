@@ -87,9 +87,12 @@ function FinalBar({ score }) {
     <svg width="600" height="900" viewBox="0 0 600 900" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <g clip-path="url(#clip0_2187_476)">
     <rect width="600" height="900" fill="white"/>
-    <rect width="600" height="900" fill="#73944F"/>
+    <rect width="600" height="900" fill="#ffffffff"/>
     <path d="M300.681 724C417.921 724 524.137 755.909 601.362 807.581V979H0V807.581C77.2253 755.909 183.441 724 300.681 724Z" fill="#506B33"/>
-    <path d="M300 140.999C183.026 140.999 77.0505 105.211 0 47.2578V-145H600V47.2578C522.95 105.211 416.974 140.999 300 140.999Z" fill="white"/>
+    <svg width="600" height="166" viewBox="0 0 600 166" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M-85 -118C-71 -118 -57 -118 -43 -118C-43.398 -148.598 -36.2926 -179.122 -22.8003 -207.074C33.6351 -320.969 172.287 -379.457 301.5 -380.25C459.806 -384.918 651.681 -288.964 656.5 -118C655.728 53.4529 463.455 156.24 301.5 154.75C169.547 156.377 24.6665 101.326 -39.7393 -20.5422C-55.0527 -50.5635 -63.7117 -84.0912 -64 -118C-64.4143 -84.096 -56.443 -50.2122 -41.6214 -19.6107C20.8035 104.774 166.667 164.148 301.5 165.25C466.01 169.584 670.72 71.8456 677.5 -118C674.767 -308.335 469.659 -412.906 301.5 -411.75C163.927 -413.067 11.835 -357.131 -58.5604 -224.773C-75.2031 -192.103 -84.7279 -155.215 -85 -118ZM-43 -118L-85 -118L-64 -118L-43 -118Z" fill="black"/>
+</svg>
+
     <ellipse cx="298.5" cy="758" rx="34.5" ry="8" fill="#2E3F1E"/>
     <path d="M291 605H310V756C310 757.105 309.105 758 308 758H293C291.895 758 291 757.105 291 756V605Z" fill="#151719"/>
     <path d="M280.487 81.2307C285.085 94.0907 292.373 98.8621 300.581 98.8621C308.786 98.8621 316.073 94.0907 320.674 81.2307V33.3213H280.487V81.2307Z" fill="url(#paint0_linear_2187_476)"/>
@@ -159,11 +162,11 @@ function FinalBar({ score }) {
       </filter>
     </defs>
 
-     <text x="50%" y="28%" text-anchor="middle" font-size="40" font-family="Rubik, sans-serif" fill="white" direction="rtl" font-weight="500" style="filter:url(#textShadow);">
+     <text x="50%" y="28%" text-anchor="middle" font-size="40" font-family="Rubik, sans-serif" fill="#2E3F1E" direction="rtl" font-weight="500" style="filter:url(#textShadow);">
        ניקוד סופי
      </text>
 
-     <text x="50%" y="43%" text-anchor="middle" font-size="150" font-family="Rubik, sans-serif" fill="white" font-weight="900" style="filter:url(#textShadow);" direction="rtl">
+     <text x="50%" y="43%" text-anchor="middle" font-size="150" font-family="Rubik, sans-serif" fill="#2E3F1E" font-weight="900" style="filter:url(#textShadow);" direction="rtl">
        ${score}
      </text>
 
